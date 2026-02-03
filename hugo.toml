@@ -1,0 +1,19 @@
+baseURL = "https://radar.powertrader.es/"
+languageCode = "es-es"
+title = "PowerRadar Semanal"
+theme = "PaperMod"
+
+[params]
+    env = "production"
+    title = "PowerRadar"
+    description = "Análisis semanal de tendencias energéticas"
+    author = "PowerTrader"
+    defaultTheme = "dark"
+
+    [params.assets]
+        disableHLJS = true
+
+[markup]
+    [markup.goldmark]
+        [markup.goldmark.renderer]
+            unsafe = true # ¡CRÍTICO! Para que Gemini pueda meter tablas HTML

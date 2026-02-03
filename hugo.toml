@@ -1,4 +1,4 @@
-baseURL = "https://radar.powertrader.es/"
+baseURL = "https://radar.powertrader.es/"  # Importante la barra al final y el https
 languageCode = "es-es"
 title = "PowerRadar Semanal"
 theme = "PaperMod"
@@ -8,12 +8,13 @@ theme = "PaperMod"
     title = "PowerRadar"
     description = "Análisis semanal de tendencias energéticas"
     author = "PowerTrader"
-    defaultTheme = "dark"
+    defaultTheme = "dark" # Forzamos el modo oscuro
 
     [params.assets]
         disableHLJS = true
+        disableFingerprinting = true # ESTO ARREGLA EL CSS ROTO A MENUDO
 
 [markup]
     [markup.goldmark]
         [markup.goldmark.renderer]
-            unsafe = true # ¡CRÍTICO! Para que Gemini pueda meter tablas HTML
+            unsafe = true

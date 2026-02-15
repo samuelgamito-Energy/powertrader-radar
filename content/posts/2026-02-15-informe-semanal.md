@@ -1,5 +1,5 @@
 ---
-title: "Informe Semanal de Mercados Energéticos"
+title: "PowerRadar: Elevada aportación hidráulica, desplome precios de luz España"
 date: 2026-02-15T10:00:00+01:00
 draft: false
 tags: ["Mercados", "Petróleo", "Gas", "Electricidad"]
@@ -9,7 +9,7 @@ tags: ["Mercados", "Petróleo", "Gas", "Electricidad"]
 
 **Power Trader, Analista Jefe**
 
-### Desescalada Geopolítica Impulsa Caída del Brent; Sector Eléctrico en Transición Regulatoria y Aceleración de Demanda Global
+### Desplome precios de OMIE, abaratamiento de la luz en España por gran aportación renovable. Desescalada Geopolítica Impulsa Caída del Brent
 
 La semana ha estado marcada por una notable desescalada de las tensiones geopolíticas que ha impactado directamente en los precios del petróleo, mientras que el sector eléctrico europeo navega entre importantes cambios regulatorios y una creciente demanda global.
 

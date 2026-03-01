@@ -29,9 +29,9 @@ theme = "PaperMod"
 # Añadir al final del archivo hugo.toml
 [[menu.main]]
     identifier = "universe"
-    name = "⮌ Volver a PowerTrader"
+    name = "↩ Volver a PowerTrader"
     url = "https://powertrader.es"
-    weight = 10
+    weight = 1
 
 [sitemap]
   changefreq = "weekly"

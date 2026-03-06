@@ -6,7 +6,7 @@ theme: "PaperMod"
 params:
   label:
     icon: /logo.svg
-    iconHeight: 32
+    iconHeight: 80
   env: "production"
   title: "PowerRadar"
   description: "Análisis semanal de tendencias energéticas"
@@ -18,6 +18,7 @@ params:
     - name: "x"
       url: "https://x.com/PowerSPTrader"
   assets:
+    favicon: /favicon.svg
     disableHLJS: true
     disableFingerprinting: true
 

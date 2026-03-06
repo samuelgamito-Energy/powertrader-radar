@@ -20,13 +20,6 @@ params:
   assets:
     favicon: /favicon.svg
     disableHLJS: true
-    disableFingerprinting: true
-
-markup:
-  goldmark:
-    renderer:
-      unsafe: true
-
 menu:
   main:
     - identifier: "universe"

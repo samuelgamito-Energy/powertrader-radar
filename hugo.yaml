@@ -5,6 +5,7 @@ theme: "PaperMod"
 
 params:
   label:
+    text: " "
     icon: /logo.svg
     iconHeight: 80
   env: "production"

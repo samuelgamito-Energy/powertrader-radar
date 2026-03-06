@@ -4,6 +4,9 @@ title: "PowerRadar Semanal"
 theme: "PaperMod"
 
 params:
+  label:
+    icon: /logo.svg
+    iconHeight: 32
   env: "production"
   title: "PowerRadar"
   description: "Análisis semanal de tendencias energéticas"

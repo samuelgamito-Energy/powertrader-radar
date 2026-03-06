@@ -1,0 +1,36 @@
+baseURL: "https://radar.powertrader.es/"
+languageCode: "es-es"
+title: "PowerRadar Semanal"
+theme: "PaperMod"
+
+params:
+  env: "production"
+  title: "PowerRadar"
+  description: "Análisis semanal de tendencias energéticas"
+  author: "PowerTrader"
+  defaultTheme: "dark"
+  socialIcons:
+    - name: "linkedin"
+      url: "https://linkedin.com/company/power-trader"
+    - name: "x"
+      url: "https://x.com/PowerSPTrader"
+  assets:
+    disableHLJS: true
+    disableFingerprinting: true
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
+menu:
+  main:
+    - identifier: "universe"
+      name: "↩ Volver a PowerTrader"
+      url: "https://powertrader.es"
+      weight: 1
+
+sitemap:
+  changefreq: "weekly"
+  priority: 0.8
+  filename: "sitemap.xml"

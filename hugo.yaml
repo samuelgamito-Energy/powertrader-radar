@@ -13,11 +13,13 @@ params:
   description: "Análisis semanal de tendencias energéticas"
   author: "PowerTrader"
   defaultTheme: "dark"
+  disableThemeToggle: true
   socialIcons:
     - name: "linkedin"
       url: "https://linkedin.com/company/power-trader"
     - name: "x"
       url: "https://x.com/PowerSPTrader"
+
   assets:
     favicon: /favicon.svg
     disableHLJS: true
@@ -27,6 +29,22 @@ menu:
       name: "↩ Volver a PowerTrader"
       url: "https://powertrader.es"
       weight: 1
+    - identifier: "inicio"
+      name: "Inicio"
+      url: "/"
+      weight: 10
+    - identifier: "articulos"
+      name: "Artículos"
+      url: "/posts/"
+      weight: 20
+    - identifier: "sobre"
+      name: "Sobre"
+      url: "/about/"
+      weight: 30
+    - identifier: "buscar"
+      name: "🔍"
+      url: "/search/"
+      weight: 40
 
 sitemap:
   changefreq: "weekly"

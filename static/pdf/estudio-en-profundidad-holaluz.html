@@ -1,0 +1,1877 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>⚡ Documento Multipágina: Estudio Holaluz | EnergyVision</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #07080c;
+      --card-bg: #111522;
+      --card-border: rgba(255, 255, 255, 0.08);
+      --accent-cyan: #06b6d4;
+      --accent-blue: #3b82f6;
+      --accent-green: #10b981;
+      --accent-red: #ef4444;
+      --accent-purple: #8b5cf6;
+      --accent-amber: #f59e0b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Fondo Blanco fuera de las hojas */
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: #ffffff !important;
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 15px 80px;
+      gap: 40px;
+    }
+
+    @media print {
+      body {
+        background: #ffffff !important;
+        padding: 0;
+        gap: 0;
+      }
+      .document-page {
+        box-shadow: none !important;
+        border: none !important;
+        border-radius: 0 !important;
+        page-break-after: always;
+      }
+    }
+
+    /* Hojas pegadas ARRIBA (justify-content: flex-start), con bordes rectos */
+    .document-page {
+      width: 595px;
+      height: 842px;
+      background-color: var(--bg-dark);
+      border-radius: 0 !important;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(0, 0, 0, 0.15);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    /* Inner Page Padding */
+    .page-interior {
+      padding: 28px 34px 20px;
+    }
+
+    .page-main-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      margin-bottom: auto;
+    }
+
+    /* Header Bar */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 4px;
+    }
+
+    .brand-logo-img {
+      height: 26px;
+      width: auto;
+      display: block;
+    }
+
+    .report-subtitle-tag {
+      font-size: 0.70rem;
+      font-weight: 800;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* Section Titles */
+    .section-header {
+      margin: 10px 0 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .accent-pill {
+      width: 5px;
+      height: 24px;
+      background: linear-gradient(180deg, #06b6d4 0%, #8b5cf6 100%);
+      border-radius: 0 !important;
+    }
+
+    .section-title {
+      font-size: 1.30rem;
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+    }
+
+    /* Footer */
+    .page-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.70rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      margin-top: auto;
+    }
+
+    .footer-domain {
+      color: var(--accent-cyan);
+    }
+
+    /* ==================== PORTADA ==================== */
+    .cover-bg-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.72;
+      z-index: 1;
+    }
+
+    .cover-gradient-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        180deg,
+        rgba(7, 8, 12, 0.65) 0%,
+        rgba(7, 8, 12, 0.15) 35%,
+        rgba(7, 8, 12, 0.68) 70%,
+        rgba(7, 8, 12, 0.96) 100%
+      );
+      z-index: 2;
+    }
+
+    .cover-content {
+      position: relative;
+      z-index: 3;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 42px 42px;
+    }
+
+    .cover-brand-header {
+      background: rgba(15, 23, 42, 0.45);
+      backdrop-filter: blur(12px);
+      padding: 8px 14px;
+      border-radius: 0 !important;
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+    }
+
+    .cover-main-body {
+      position: relative;
+      margin-bottom: 24px;
+    }
+
+    .decorative-accent-bar {
+      width: 6px;
+      height: 105px;
+      background: linear-gradient(180deg, #10b981 0%, #06b6d4 50%, #8b5cf6 100%);
+      border-radius: 0 !important;
+      position: absolute;
+      left: 0;
+      box-shadow: 0 0 18px rgba(6, 182, 212, 0.9);
+    }
+
+    .cover-title-wrapper {
+      padding-left: 22px;
+    }
+
+    .cover-main-title {
+      font-size: 2.35rem;
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      text-shadow: 0 4px 25px rgba(0, 0, 0, 0.9);
+    }
+
+    .cover-main-title span.highlight {
+      background: linear-gradient(135deg, #38bdf8 0%, #8b5cf6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .cover-subtitle {
+      font-size: 1.05rem;
+      color: #cbd5e1;
+      font-weight: 400;
+      line-height: 1.55;
+      max-width: 490px;
+    }
+
+    /* ==================== ÍNDICE ==================== */
+    .toc-full-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 8px 0 16px;
+    }
+
+    .toc-row-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 0 !important;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .toc-left-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .toc-num-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.10rem;
+      font-weight: 900;
+      color: var(--accent-cyan);
+      background: rgba(6, 182, 212, 0.1);
+      border: 1px solid rgba(6, 182, 212, 0.25);
+      width: 36px;
+      height: 36px;
+      border-radius: 0 !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .toc-text-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .toc-section-name {
+      font-size: 0.90rem;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .toc-section-desc {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+
+    .toc-page-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.83rem;
+      font-weight: 700;
+      color: var(--accent-purple);
+    }
+
+    /* ==================== INTRODUCCIÓN ==================== */
+    .intro-paragraph {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: #e2e8f0;
+      margin-bottom: 18px;
+      font-weight: 400;
+    }
+
+    .intro-box-highlight {
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.08) 0%, rgba(139, 92, 246, 0.08) 100%);
+      border-left: 4px solid var(--accent-cyan);
+      border-radius: 0 !important;
+      padding: 18px 22px;
+      margin: 16px 0;
+    }
+
+    .intro-box-highlight p {
+      font-size: 0.94rem;
+      line-height: 1.75;
+      color: #f8fafc;
+      font-weight: 400;
+    }
+
+    /* ==================== PÁGINA 5: SVG GRAPHIC AMPLIA ==================== */
+    .full-svg-wrapper-p5 {
+      width: 100%;
+      height: 260px;
+      margin: 2px 0 4px;
+      border-radius: 0 !important;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+      background-color: #08090d;
+    }
+
+    .milestones-explain-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+      margin-top: 2px;
+    }
+
+    .milestone-card-item {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 0 !important;
+      padding: 3px 6px;
+      font-size: 0.67rem;
+      line-height: 1.25;
+      color: #cbd5e1;
+    }
+
+    .milestone-card-item strong {
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .milestone-tag-inline {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.64rem;
+      font-weight: 800;
+      padding: 1px 4px;
+      border-radius: 0 !important;
+      margin-right: 4px;
+    }
+
+    /* ==================== PÁGINAS INTERIORES & TABLAS ==================== */
+    .matrix-box {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 0 !important;
+      padding: 16px;
+      margin-top: 10px;
+    }
+
+    .matrix-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+    }
+
+    .matrix-table th {
+      background: rgba(255, 255, 255, 0.04);
+      color: #ffffff;
+      padding: 10px 12px;
+      font-weight: 700;
+      text-align: left;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .matrix-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      vertical-align: top;
+      line-height: 1.4;
+    }
+
+    /* Tablas financieras */
+    .doc-table-fixed {
+      width: 100%;
+      table-layout: fixed;
+      border-collapse: collapse;
+      font-size: 0.76rem;
+      margin-bottom: 12px;
+    }
+
+    .doc-table-fixed th {
+      background: rgba(255, 255, 255, 0.06);
+      color: #ffffff;
+      padding: 8px 3px;
+      font-weight: 700;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      overflow: visible;
+      white-space: nowrap;
+    }
+
+    .doc-table-fixed td {
+      padding: 7px 3px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      overflow: visible;
+      white-space: nowrap;
+    }
+
+    .doc-table-fixed td.num {
+      text-align: right;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+    }
+
+    .doc-table-fixed th.num { text-align: right; }
+
+    .callout-doc {
+      background: rgba(239, 68, 68, 0.08);
+      border-left: 3px solid var(--accent-red);
+      border-radius: 0 !important;
+      padding: 10px 14px;
+      font-size: 0.78rem;
+      line-height: 1.50;
+      color: #cbd5e1;
+    }
+
+    .audit-year-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 0 !important;
+      padding: 14px 16px;
+      margin-bottom: 14px;
+      font-size: 0.81rem;
+      line-height: 1.55;
+      color: #cbd5e1;
+    }
+
+    .audit-year-title {
+      font-size: 0.86rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .fin-analysis-text {
+      font-size: 0.82rem;
+      line-height: 1.58;
+      color: #cbd5e1;
+      margin-bottom: 10px;
+    }
+
+    /* Fuentes completas de 31 enlaces */
+    .sources-doc-grid-full {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px 10px;
+    }
+
+    .source-doc-item-full {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 0 !important;
+      padding: 6px 9px;
+      font-size: 0.70rem;
+      line-height: 1.30;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .source-doc-item-full a {
+      color: #93c5fd;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .source-doc-item-full a:hover {
+      color: var(--accent-cyan);
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== PÁGINA 1: PORTADA MASTER ==================== -->
+  <div class="document-page">
+    <img class="cover-bg-image" src="energyvision_especiales_cover_bg.jpg" alt="Master Cover Power Radar">
+    <div class="cover-gradient-overlay"></div>
+    <div class="cover-content">
+      
+      <div class="cover-header">
+        <div class="cover-brand-header">
+          <img src="powerradar_logo.png" alt="Power Radar Logo" class="brand-logo-img">
+        </div>
+      </div>
+
+      <div class="cover-main-body">
+        <div class="decorative-accent-bar"></div>
+        <div class="cover-title-wrapper">
+          <h1 class="cover-main-title">ESTUDIO EN PROFUNDIDAD:<br><span class="highlight">HOLALUZ</span></h1>
+          <p class="cover-subtitle">
+            Lecciones de disciplina financiera, gestión de liquidez y resiliencia en el mercado comercializador español.
+          </p>
+        </div>
+      </div>
+
+      <div class="page-footer" style="border-top: 1px solid rgba(255,255,255,0.12);">
+        <span style="font-weight: 800; color: #94a3b8;">CONOCIMIENTO BURSÁTIL DE MERCADOS ENERGÉTICOS</span>
+        <span class="footer-domain">www.powertrader.es</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== PÁGINA 2: ÍNDICE DE CONTENIDOS (14 PÁGS) ==================== -->
+  <div class="document-page page-interior">
+    <div class="page-header">
+      <div class="brand-combined">
+        <img src="powerradar_logo.png" alt="Power Radar Logo" class="brand-logo-img">
+      </div>
+      <div class="report-subtitle-tag">VISIÓN BURSÁTIL: SECTOR ENERGÉTICO</div>
+    </div>
+
+    <div class="page-main-content">
+      <div class="section-header">
+        <div class="accent-pill"></div>
+        <h2 class="section-title">Índice de Contenidos</h2>
+      </div>
+
+      <div class="toc-full-container">
+        
+        <div class="toc-row-card">
+          <div class="toc-left-group">
+            <div class="toc-num-badge">01</div>
+            <div class="toc-text-wrapper">
+              <span class="toc-section-name">Introducción del Informe</span>
+              <span class="toc-section-desc">Expansión inicial, salida a bolsa, efecto contagio y marco analítico.</span>
+            </div>
+          </div>
+          <span class="toc-page-num">PÁG. 03</span>
+        </div>
+
+        <div class="toc-row-card">
+          <div class="toc-left-group">
+            <div class="toc-num-badge">02</div>
+            <div class="toc-text-wrapper">
+              <span class="toc-section-name">Enfoque Sectorial & Resiliencia Retailer</span>
+              <span class="toc-section-desc">Idiosincrasia de Holaluz Vs Comercializadora Financieramente Sostenible.</span>
+            </div>
+          </div>
+          <span class="toc-page-num">PÁG. 04–06</span>
+        </div>
+
+        <div class="toc-row-card">
+          <div class="toc-left-group">
+            <div class="toc-num-badge">03</div>
+            <div class="toc-text-wrapper">
+              <span class="toc-section-name">Dashboard Bursátil & Hitos Corporativos</span>
+              <span class="toc-section-desc">Evolución de la acción HLZ.MC (14,40 € a 0,826 €) e hitos estratégicos 2019-2026.</span>
+            </div>
+          </div>
+          <span class="toc-page-num">PÁG. 07</span>
+        </div>
+
+        <div class="toc-row-card">
+          <div class="toc-left-group">
+            <div class="toc-num-badge">04</div>
+            <div class="toc-text-wrapper">
+              <span class="toc-section-name">Evolución Financiera & Operativa (2019-2025)</span>
+              <span class="toc-section-desc">Desglose de facturación, pérdidas, masa salarial y notas metodológicas.</span>
+            </div>
+          </div>
+          <span class="toc-page-num">PÁG. 08–09</span>
+        </div>
+
+        <div class="toc-row-card">
+          <div class="toc-left-group">
+            <div class="toc-num-badge">05</div>
+            <div class="toc-text-wrapper">
+              <span class="toc-section-name">Dictámenes de Auditoría EY (FY23–FY25)</span>
+              <span class="toc-section-desc">Párrafos de énfasis, salvedades textuales, Going Concern y suspensión BOE.</span>
+            </div>
+          </div>
+          <span class="toc-page-num">PÁG. 10–11</span>
+        </div>
+
+        <div class="toc-row-card">
+          <div class="toc-left-group">
+            <div class="toc-num-badge">06</div>
+            <div class="toc-text-wrapper">
+              <span class="toc-section-name">Avales del ICO & Estructura Financiera Actual</span>
+              <span class="toc-section-desc">Cobertura estatal 70% (29,8 M€), plan 2025, Icosium (33%) y deuda neta.</span>
+            </div>
+          </div>
+          <span class="toc-page-num">PÁG. 12–13</span>
+        </div>
+
+        <div class="toc-row-card">
+          <div class="toc-left-group">
+            <div class="toc-num-badge">07</div>
+            <div class="toc-text-wrapper">
+              <span class="toc-section-name">Conclusión</span>
+              <span class="toc-section-desc">Inactividad Vs solvencia, censo de 39, garantías REE/OMIE (GOB/GOA), descalce caja y colofón.</span>
+            </div>
+          </div>
+          <span class="toc-page-num">PÁG. 14–15</span>
+        </div>
+
+        <div class="toc-row-card">
+          <div class="toc-left-group">
+            <div class="toc-num-badge">08</div>
+            <div class="toc-text-wrapper">
+              <span class="toc-section-name">Fuentes Documentales & Referencias</span>
+              <span class="toc-section-desc">Fichero completo de 31 enlaces a prensa económica, BOE, BME Growth y EY.</span>
+            </div>
+          </div>
+          <span class="toc-page-num">PÁG. 16</span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>Estudio Holaluz</span>
+      <span class="footer-domain">www.powertrader.es</span>
+      <span>PÁGINA 02 DE 16</span>
+    </div>
+  </div>
+
+  <!-- ==================== PÁGINA 3: INTRODUCCIÓN DEL INFORME ==================== -->
+  <div class="document-page page-interior">
+    <div class="page-header">
+      <div class="brand-combined">
+        <img src="powerradar_logo.png" alt="Power Radar Logo" class="brand-logo-img">
+      </div>
+      <div class="report-subtitle-tag">VISIÓN BURSÁTIL: SECTOR ENERGÉTICO</div>
+    </div>
+
+    <div class="page-main-content">
+      <div class="section-header">
+        <div class="accent-pill"></div>
+        <h2 class="section-title">01. Introducción del Informe</h2>
+      </div>
+
+      <p class="intro-paragraph">
+        Tras una fase inicial caracterizada por una rápida expansión de su cartera de clientes y un sólido posicionamiento de marca, Holaluz materializó su salida a bolsa. Desde entonces, los resultados de Holaluz no han sido los esperados, la evolución de su cotización ha sido errática y ha pasado por momentos delicados. Sin embargo, la reciente apertura de un expediente administrativo contra la compañía parece ser el punto y final y, sobretodo, ha generado un impacto colateral en el mercado. Este evento ha derivado en un efecto contagio, traduciéndose en una restricción del flujo de financiación para el conjunto del sector comercializador debido al incremento en la percepción de riesgo por parte de las entidades de crédito.
+      </p>
+
+      <div class="intro-box-highlight">
+        <p>
+          El presente informe analiza en profundidad la evolución operativa y financiera de Holaluz. Asimismo, plantea un análisis comparativo para determinar si su estructura de negocio es extrapolable o diverge significativamente de los modelos operativos de muchas <strong style="color: #38bdf8; font-weight: 800;">otras comercializadoras independientes que trabajan de una manera distinta</strong> dentro del sector y que si son <strong style="color: #34d399; font-weight: 800;">rentables, confiables y escalables</strong>.
+        </p>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>Estudio Holaluz</span>
+      <span class="footer-domain">www.powertrader.es</span>
+      <span>PÁGINA 03 DE 16</span>
+    </div>
+  </div>
+
+  <!-- ==================== PÁGINA 4: ENFOQUE SECTORIAL (PARTE I) ==================== -->
+  <div class="document-page page-interior">
+    <div class="page-header">
+      <div class="brand-combined">
+        <img src="powerradar_logo.png" alt="Power Radar Logo" class="brand-logo-img">
+      </div>
+      <div class="report-subtitle-tag">VISIÓN BURSÁTIL: SECTOR ENERGÉTICO</div>
+    </div>
+
+    <div class="page-main-content">
+      <div class="section-header" style="margin: 4px 0 6px;">
+        <div class="accent-pill"></div>
+        <h2 class="section-title">02. Enfoque Sectorial & Resiliencia (Parte I)</h2>
+      </div>
+
+      <div style="font-size: 0.84rem; color: #cbd5e1; line-height: 1.48; margin-bottom: 8px;">
+        El expediente administrativo de inhabilitación por impago de peajes y la suspensión bursátil de Holaluz responden a un <strong>modelo de negocio e hipercrecimiento apalancado específico</strong>. El sector de las comercializadoras independientes en España cuenta con numerosos operadores de tamaño mediano y pequeño que funcionan con alta rentabilidad y solidez contable.
+      </div>
+
+      <div style="font-size: 0.82rem; color: #cbd5e1; line-height: 1.48; margin-bottom: 8px; padding: 8px 12px; background: rgba(6, 182, 212, 0.05); border-left: 3px solid var(--accent-cyan);">
+        En el análisis financiero y regulatorio del sector de la comercialización de energía en España, es crucial desvincular los problemas específicos de gestión de capital y estructura de costes de Holaluz de la salud general del tejido comercializador independiente. Centenas de pequeñas y medianas comercializadoras en el mercado peninsular operan diariamente de manera solvente y rentable.
+      </div>
+
+      <div class="matrix-box" style="padding: 10px 12px; margin-top: 4px;">
+        <div style="font-size: 0.84rem; font-weight: 800; color: #10b981; margin-bottom: 6px;">⚡ Matriz Comparativa: Holaluz Vs Comercializadora Financieramente Sostenible</div>
+        <table class="matrix-table">
+          <thead>
+            <tr>
+              <th style="padding: 6px 8px; font-size: 0.79rem; width: 26%;">Pilar Estratégico</th>
+              <th style="padding: 6px 8px; font-size: 0.79rem; width: 37%;">Modelo Holaluz (Hipercrecimiento)</th>
+              <th style="padding: 6px 8px; font-size: 0.79rem; width: 37%;">Comercializadora Financieramente Sostenible</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding: 6px 8px; font-size: 0.76rem;"><strong>Imputación CAC</strong></td>
+              <td style="padding: 6px 8px; font-size: 0.76rem;">Diferimiento al activo (18,4 M€ periodificados).</td>
+              <td style="padding: 6px 8px; font-size: 0.76rem; color:#34d399; font-weight:700;">Gasto directo en P&L del ejercicio corriente.</td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 8px; font-size: 0.76rem;"><strong>Estructura Operativa</strong></td>
+              <td style="padding: 6px 8px; font-size: 0.76rem;">Intensiva en personal (compra instaladoras, 752 empl.).</td>
+              <td style="padding: 6px 8px; font-size: 0.76rem; color:#34d399; font-weight:700;">Modelo Asset-Light subcontratado flexible.</td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 8px; font-size: 0.76rem;"><strong>Cobertura de Precio</strong></td>
+              <td style="padding: 6px 8px; font-size: 0.76rem;">Exposición al pool spot y aceleración fotovoltaica.</td>
+              <td style="padding: 6px 8px; font-size: 0.76rem; color:#34d399; font-weight:700;">Coberturas a plazo en OTC o Cámara y PPAs.</td>
+            </tr>
+            <tr>
+              <td style="padding: 6px 8px; font-size: 0.76rem;"><strong>Circulante y Peajes</strong></td>
+              <td style="padding: 6px 8px; font-size: 0.76rem;">Fondo maniobra negativo (−56,4 M€) e impago peajes.</td>
+              <td style="padding: 6px 8px; font-size: 0.76rem; color:#34d399; font-weight:700;">Circulante positivo y reserva colateral peajes.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>Estudio Holaluz</span>
+      <span class="footer-domain">www.powertrader.es</span>
+      <span>PÁGINA 04 DE 16</span>
+    </div>
+  </div>
+
+  <!-- ==================== PÁGINA 5: ENFOQUE SECTORIAL (PARTE II: PILARES 1, 2 Y 3) ==================== -->
+  <div class="document-page page-interior">
+    <div class="page-header">
+      <div class="brand-combined">
+        <img src="powerradar_logo.png" alt="Power Radar Logo" class="brand-logo-img">
+      </div>
+      <div class="report-subtitle-tag">VISIÓN BURSÁTIL: SECTOR ENERGÉTICO</div>
+    </div>
+
+    <div class="page-main-content">
+      <div class="section-header" style="margin: 4px 0 6px;">
+        <div class="accent-pill"></div>
+        <h2 class="section-title" style="font-size: 1.15rem;">02. Enfoque Sectorial & Resiliencia (Parte II)</h2>
+      </div>
+
+      <div style="font-size: 0.82rem; font-weight: 800; color: var(--accent-cyan); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.04em;">
+        🔍 Análisis Detallado de Pilares Estratégicos (1, 2 y 3)
+      </div>
+
+      <!-- Pilar 1 -->
+      <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-left: 4px solid var(--accent-cyan); padding: 7px 12px; margin-bottom: 6px; font-size: 0.76rem; line-height: 1.44; color: #cbd5e1;">
+        <strong style="color: #ffffff; font-size: 0.81rem; display: block; margin-bottom: 2px;">1. Imputación y Tratamiento del Coste de Adquisición de Clientes (CAC)</strong>
+        Mientras que una <em>comercializadora financieramente sostenible</em> registra los gastos de marketing y captación directamente contra la cuenta de pérdidas y ganancias del ejercicio en que se devengan, Holaluz recurrió a la periodificación diferida del CAC en el activo inmaterial conforme al criterio del ICAC (acumulando 18,4 M€ periodificados). Esta práctica amortigua artificialmente el impacto inmediato en el P&L durante las fases de hipercrecimiento, pero genera una severa vulnerabilidad financiera futura al sobrecargar el balance con activos intangibles de difícil monetización ante un incremento de la tasa de cancelación (<em>churn rate</em>).
+      </div>
+
+      <!-- Pilar 2 -->
+      <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-left: 4px solid var(--accent-green); padding: 7px 12px; margin-bottom: 6px; font-size: 0.76rem; line-height: 1.44; color: #cbd5e1;">
+        <strong style="color: #ffffff; font-size: 0.81rem; display: block; margin-bottom: 2px;">2. Estructura Operativa y Modelo de Recursos Humanos</strong>
+        Las comercializadoras independientes solventes operan bajo un modelo <em>Asset-Light</em>, subcontratando las labores de instalación, mantenimiento y captación a redes externas para mantener unos costes fijos mínimos y ajustables al ciclo comercial. Por el contrario, la estrategia de Holaluz implicó la adquisición directa de empresas instaladoras fotovoltaicas, internalizando una pesada masa salarial rígida que alcanzó un máximo de 752 empleados en 2022. Cuando la demanda residencial de autoconsumo fotovoltaico cayó un 50% en 2023, la compañía careció de la flexibilidad operativa para adaptar sus costes fijos, viéndose abocada a severos reajustes vía ERE.
+      </div>
+
+      <!-- Pilar 3 -->
+      <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-left: 4px solid var(--accent-amber); padding: 7px 12px; margin-bottom: 0; font-size: 0.76rem; line-height: 1.44; color: #cbd5e1;">
+        <strong style="color: #ffffff; font-size: 0.81rem; display: block; margin-bottom: 2px;">3. Gestión de Coberturas y Riesgo de Precio de la Energía</strong>
+        La política prudente en la comercialización minorista exige estructurar gran parte de la cartera en productos <strong>indexados <em>passthrough</em></strong> (donde se traslada de forma transparente el coste mayorista real más un margen de gestión) y gestionar los productos de precio fijo, complementándolos con coberturas a plazo en mercados organizados (OMIP/MEFF) o contratos PPA. Holaluz, en cambio, mantuvo una elevada exposición a precios fijos no coberturados frente a la volatilidad del mercado diario (mercado <em>spot</em>), combinada con un despliegue agresivo en autoconsumo. Al encarecerse drásticamente la energía sin coberturas y colapsar el mercado solar residencial, el margen unitario (<em>EBITDA por suministro</em>) sufrió un deterioro irreversible.
+      </div>
+
+    </div>
+
+    <div class="page-footer">
+      <span>Estudio Holaluz</span>
+      <span class="footer-domain">www.powertrader.es</span>
+      <span>PÁGINA 05 DE 16</span>
+    </div>
+  </div>
+
+  <!-- ==================== PÁGINA 6: ENFOQUE SECTORIAL (PARTE III: PILAR 4) ==================== -->
+  <div class="document-page page-interior">
+    <div class="page-header">
+      <div class="brand-combined">
+        <img src="powerradar_logo.png" alt="Power Radar Logo" class="brand-logo-img">
+      </div>
+      <div class="report-subtitle-tag">VISIÓN BURSÁTIL: SECTOR ENERGÉTICO</div>
+    </div>
+
+    <div class="page-main-content">
+      <div class="section-header" style="margin: 4px 0 8px;">
+        <div class="accent-pill"></div>
+        <h2 class="section-title" style="font-size: 1.15rem;">02. Enfoque Sectorial & Resiliencia (Parte III)</h2>
+      </div>
+
+      <div style="font-size: 0.82rem; font-weight: 800; color: var(--accent-cyan); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.04em;">
+        🔍 Pilar 4: Gestión del Fondo de Maniobra y Garantías de Peajes
+      </div>
+
+      <!-- Pilar 4 Extendido -->
+      <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-left: 4px solid var(--accent-red); padding: 16px 20px; margin-bottom: 14px; font-size: 0.82rem; line-height: 1.6; color: #cbd5e1;">
+        <strong style="color: #ffffff; font-size: 0.90rem; display: block; margin-bottom: 8px;">4. Circulante, Cobertura Colateral y Liquidez Regulatoria</strong>
+        <p style="margin-bottom: 10px;">
+          El pilar fundamental de la solvencia en una comercializadora independiente reside en mantener un circulante positivo constante y constituir reservas de liquidez blindadas para atender la liquidación regular de peajes de acceso (tarifas de redes de transporte y distribución) ante la CNMC y las distribuidoras eléctricas.
+        </p>
+        <p style="margin-bottom: 10px;">
+          En el caso de Holaluz, la acumulación de pérdidas netas continuadas destruyó la posición de liquidez, hundiendo el fondo de maniobra a saldos profundamente negativos (alcanzando <strong>−56,4 M€ al cierre de 2024</strong>). Esta situación de asfixia financiera consumió la tesorería disponible y desatendió las garantías colaterales exigidas por el sistema eléctrico.
+        </p>
+        <p style="margin-bottom: 0;">
+          El impago acumulado de más de <strong>6 M€ en peajes regulatorios</strong> constituyó el desencadenante directo del expediente de inhabilitación iniciado por el Ministerio para la Transición Ecológica (MITECO) en julio de 2026, provocando el traspaso automático de su cartera de clientes a comercializadoras de referencia bajo el régimen de PVPC y la consiguiente paralización operativa de la compañía.
+        </p>
+      </div>
+
+      <!-- Cuadro de resumen analítico -->
+      <div style="background: rgba(15, 23, 42, 0.65); border: 1px solid var(--card-border); border-left: 4px solid var(--accent-cyan); padding: 14px 18px; font-size: 0.81rem; line-height: 1.58; color: #cbd5e1;">
+        <strong style="color: var(--accent-cyan); font-size: 0.85rem; display: block; margin-bottom: 6px;">💡 Conclusión del Análisis Sectorial:</strong>
+        El modelo de Holaluz no debe confundirse con la operativa estándar de gran parte de la comercialización independiente en España. Frente al hipercrecimiento apalancado, la asunción de riesgos de precio no coberturados y la rígida integración vertical de costes fijos de Holaluz, la inmensa mayoría de las comercializadoras independientes operan con estructuras livianas (<em>Asset-Light</em>), contratos indexados <em>passthrough</em> y una estricta disciplina de caja que preserva su solvencia y continuidad en el mercado.
+      </div>
+
+    </div>
+
+    <div class="page-footer">
+      <span>Estudio Holaluz</span>
+      <span class="footer-domain">www.powertrader.es</span>
+      <span>PÁGINA 06 DE 16</span>
+    </div>
+  </div>
+
+  <!-- ==================== PÁGINA 7: GRÁFICO BURSÁTIL & EXPLICACIÓN DE HITOS ==================== -->
+  <div class="document-page page-interior">
+    <div class="page-header">
+      <div class="brand-combined">
+        <img src="powerradar_logo.png" alt="Power Radar Logo" class="brand-logo-img">
+      </div>
+      <div class="report-subtitle-tag">VISIÓN BURSÁTIL: SECTOR ENERGÉTICO</div>
+    </div>
+
+    <div class="page-main-content">
+      <div class="section-header" style="margin: 6px 0 4px;">
+        <div class="accent-pill"></div>
+        <h2 class="section-title" style="font-size: 1.20rem;">03. Cotización Bursátil & Hitos Corporativos</h2>
+      </div>
+
+      <div class="full-svg-wrapper-p5">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 880" width="100%" height="100%" preserveAspectRatio="none" style="background-color: #08090d; font-family: 'Inter', system-ui, -apple-system, sans-serif;">
+          <defs>
+            <linearGradient id="bgGradP5" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#07080c"/>
+              <stop offset="50%" stop-color="#0f131f"/>
+              <stop offset="100%" stop-color="#050608"/>
+            </linearGradient>
+            <linearGradient id="headerGradP5" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#10b981" stop-opacity="0.18"/>
+              <stop offset="40%" stop-color="#06b6d4" stop-opacity="0.18"/>
+              <stop offset="70%" stop-color="#8b5cf6" stop-opacity="0.18"/>
+              <stop offset="100%" stop-color="#ef4444" stop-opacity="0.18"/>
+            </linearGradient>
+            <linearGradient id="stockAreaGradP5" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#10b981" stop-opacity="0.3"/>
+              <stop offset="35%" stop-color="#06b6d4" stop-opacity="0.2"/>
+              <stop offset="65%" stop-color="#8b5cf6" stop-opacity="0.12"/>
+              <stop offset="85%" stop-color="#ef4444" stop-opacity="0.08"/>
+              <stop offset="100%" stop-color="#ef4444" stop-opacity="0.0"/>
+            </linearGradient>
+            <linearGradient id="stockLineGradP5" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#10b981"/>
+              <stop offset="25%" stop-color="#06b6d4"/>
+              <stop offset="50%" stop-color="#8b5cf6"/>
+              <stop offset="75%" stop-color="#f59e0b"/>
+              <stop offset="100%" stop-color="#ef4444"/>
+            </linearGradient>
+            <linearGradient id="cardDarkGreenP5" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#1e293b" stop-opacity="0.95"/>
+              <stop offset="100%" stop-color="#0f172a" stop-opacity="0.95"/>
+            </linearGradient>
+            <linearGradient id="cardDarkPurpleP5" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#2e1065" stop-opacity="0.5"/>
+              <stop offset="100%" stop-color="#0f172a" stop-opacity="0.95"/>
+            </linearGradient>
+            <linearGradient id="cardDarkRedP5" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#450a0a" stop-opacity="0.65"/>
+              <stop offset="100%" stop-color="#0f172a" stop-opacity="0.95"/>
+            </linearGradient>
+            <filter id="glowGreenP5" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="8" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+            <filter id="glowCyanP5" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="8" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+            <filter id="glowPurpleP5" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="8" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+            <filter id="glowRedP5" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="10" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+          </defs>
+
+          <rect width="1280" height="880" fill="url(#bgGradP5)"/>
+
+          <!-- Header Box inside SVG -->
+          <g transform="translate(50, 30)">
+            <rect x="0" y="0" width="1180" height="80" rx="0" fill="url(#headerGradP5)" stroke="#334155" stroke-width="1"/>
+            <g transform="translate(30, 22)">
+              <text x="0" y="22" fill="#ffffff" font-size="22" font-weight="900" letter-spacing="-0.5">HOLALUZ: COTIZACIÓN BURSÁTIL Y HITOS DE BALANCE (2019 – 2026)</text>
+              <text x="0" y="44" fill="#94a3b8" font-size="13" font-weight="400">Integración visual entre el precio de la acción HLZ.MC en BME Growth y las decisiones contables/operativas clave</text>
+            </g>
+          </g>
+
+          <!-- Grid lines & Price axis -->
+          <g stroke="#ffffff" stroke-opacity="0.04" stroke-width="1">
+            <line x1="80" y1="260" x2="1220" y2="260"/>
+            <text x="70" y="264" fill="#64748b" font-size="11" font-weight="600" text-anchor="end">15,00 €</text>
+            <line x1="80" y1="332" x2="1220" y2="332"/>
+            <text x="70" y="336" fill="#64748b" font-size="11" font-weight="600" text-anchor="end">12,00 €</text>
+            <line x1="80" y1="404" x2="1220" y2="404"/>
+            <text x="70" y="408" fill="#64748b" font-size="11" font-weight="600" text-anchor="end">9,00 €</text>
+            <line x1="80" y1="476" x2="1220" y2="476"/>
+            <text x="70" y="480" fill="#64748b" font-size="11" font-weight="600" text-anchor="end">6,00 €</text>
+            <line x1="80" y1="548" x2="1220" y2="548"/>
+            <text x="70" y="552" fill="#64748b" font-size="11" font-weight="600" text-anchor="end">3,00 €</text>
+            <line x1="80" y1="620" x2="1220" y2="620" stroke-opacity="0.15"/>
+            <text x="70" y="624" fill="#94a3b8" font-size="11" font-weight="700" text-anchor="end">0,00 €</text>
+          </g>
+
+          <!-- Stock Curve Path -->
+          <path d="M 110 433.28 L 180 447.68 L 270 336.8 L 350 274.4 L 470 442.4 L 630 552.8 L 790 593.6 L 950 599.84 L 1120 600.17 L 1120 620 L 110 620 Z" fill="url(#stockAreaGradP5)"/>
+          <path d="M 110 433.28 L 180 447.68 L 270 336.8 L 350 274.4 L 470 442.4 L 630 552.8 L 790 593.6 L 950 599.84 L 1120 600.17" fill="none" stroke="url(#stockLineGradP5)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" filter="url(#glowGreenP5)"/>
+
+          <g transform="translate(350, 274.4)">
+            <circle cx="0" cy="0" r="7" fill="#38bdf8" stroke="#ffffff" stroke-width="2.5" filter="url(#glowCyanP5)"/>
+            <line x1="0" y1="0" x2="0" y2="-45" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3,3"/>
+            <rect x="-50" y="-72" width="100" height="24" rx="0" fill="#0284c7" stroke="#38bdf8" stroke-width="1"/>
+            <text x="0" y="-56" fill="#ffffff" font-size="11" font-weight="900" text-anchor="middle">ATH: 14,40 € 🚀</text>
+          </g>
+
+          <!-- Milestone 1 -->
+          <g transform="translate(110, 0)">
+            <line x1="0" y1="433.28" x2="0" y2="240" stroke="#10b981" stroke-width="2" stroke-dasharray="4,4"/>
+            <circle cx="0" cy="433.28" r="8" fill="#07080c" stroke="#10b981" stroke-width="3" filter="url(#glowGreenP5)"/>
+            <g transform="translate(-75, 130)">
+              <rect x="0" y="0" width="165" height="110" fill="url(#cardDarkGreenP5)" stroke="#10b981" stroke-width="1.5"/>
+              <rect x="10" y="-12" width="80" height="20" fill="#10b981"/>
+              <text x="50" y="2" fill="#ffffff" font-size="10" font-weight="800" text-anchor="middle">NOV 2019</text>
+              <text x="12" y="22" fill="#ffffff" font-size="11" font-weight="800">🚀 Salida a Bolsa</text>
+              <text x="12" y="40" fill="#34d399" font-size="16" font-weight="800">7,78 € <tspan font-size="10" fill="#94a3b8">IPO</tspan></text>
+              <text x="12" y="58" fill="#cbd5e1" font-size="9.5" font-weight="500">• Val. inicial: 160 M€</text>
+              <text x="12" y="72" fill="#cbd5e1" font-size="9.5" font-weight="500">• Captación 30 M€ capital</text>
+              <text x="12" y="86" fill="#cbd5e1" font-size="9.5" font-weight="500">• Gasto pleno captación</text>
+            </g>
+          </g>
+
+          <!-- Milestone 2 -->
+          <g transform="translate(270, 0)">
+            <line x1="0" y1="336.8" x2="0" y2="640" stroke="#06b6d4" stroke-width="2" stroke-dasharray="4,4"/>
+            <circle cx="0" cy="336.8" r="8" fill="#07080c" stroke="#06b6d4" stroke-width="3" filter="url(#glowCyanP5)"/>
+            <g transform="translate(-75, 640)">
+              <rect x="0" y="0" width="175" height="115" fill="url(#cardDarkGreenP5)" stroke="#06b6d4" stroke-width="1.5"/>
+              <rect x="10" y="-12" width="80" height="20" fill="#06b6d4"/>
+              <text x="50" y="2" fill="#ffffff" font-size="10" font-weight="800" text-anchor="middle">MAR 2021</text>
+              <text x="12" y="22" fill="#ffffff" font-size="11" font-weight="800">📊 Criterio ICAC</text>
+              <text x="12" y="40" fill="#38bdf8" font-size="16" font-weight="800">18,4 M€ <tspan font-size="10" fill="#94a3b8">Periodificados</tspan></text>
+              <text x="12" y="58" fill="#cbd5e1" font-size="9.5" font-weight="500">• Diferimiento en activo</text>
+              <text x="12" y="72" fill="#cbd5e1" font-size="9.5" font-weight="500">• Software propio: >10 M€</text>
+              <text x="12" y="86" fill="#38bdf8" font-size="9.5" font-weight="600">• Acción a 11,80 €</text>
+            </g>
+          </g>
+
+          <!-- Milestone 3 -->
+          <g transform="translate(470, 0)">
+            <line x1="0" y1="442.4" x2="0" y2="240" stroke="#0284c7" stroke-width="2" stroke-dasharray="4,4"/>
+            <circle cx="0" cy="442.4" r="8" fill="#07080c" stroke="#0284c7" stroke-width="3"/>
+            <g transform="translate(-75, 130)">
+              <rect x="0" y="0" width="170" height="110" fill="url(#cardDarkGreenP5)" stroke="#0284c7" stroke-width="1.5"/>
+              <rect x="10" y="-12" width="80" height="20" fill="#0284c7"/>
+              <text x="50" y="2" fill="#ffffff" font-size="10" font-weight="800" text-anchor="middle">OCT 2022</text>
+              <text x="12" y="22" fill="#ffffff" font-size="11" font-weight="800">🛑 Cierre del Gas</text>
+              <text x="12" y="40" fill="#60a5fa" font-size="16" font-weight="800">70.000 <tspan font-size="10" fill="#94a3b8">Clientes a TUR</tspan></text>
+              <text x="12" y="58" fill="#cbd5e1" font-size="9.5" font-weight="500">• Traspaso clientes TUR</text>
+              <text x="12" y="72" fill="#cbd5e1" font-size="9.5" font-weight="500">• Pérdida margen cruzado</text>
+              <text x="12" y="86" fill="#f59e0b" font-size="9.5" font-weight="600">• Acción cae a 7,40 €</text>
+            </g>
+          </g>
+
+          <!-- Milestone 4 -->
+          <g transform="translate(630, 0)">
+            <line x1="0" y1="552.8" x2="0" y2="640" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="4,4"/>
+            <circle cx="0" cy="552.8" r="8" fill="#07080c" stroke="#8b5cf6" stroke-width="3" filter="url(#glowPurpleP5)"/>
+            <g transform="translate(-75, 640)">
+              <rect x="0" y="0" width="175" height="115" fill="url(#cardDarkPurpleP5)" stroke="#8b5cf6" stroke-width="1.5"/>
+              <rect x="10" y="-12" width="80" height="20" fill="#7c3aed"/>
+              <text x="50" y="2" fill="#ffffff" font-size="10" font-weight="800" text-anchor="middle">AÑO 2023</text>
+              <text x="12" y="22" fill="#ffffff" font-size="11" font-weight="800">📉 Frenazo Solar</text>
+              <text x="12" y="40" fill="#c084fc" font-size="16" font-weight="800">-26 M€ <tspan font-size="10" fill="#f87171">Pérdidas</tspan></text>
+              <text x="12" y="58" fill="#cbd5e1" font-size="9.5" font-weight="500">• -50% Autoconsumo Solar</text>
+              <text x="12" y="72" fill="#f87171" font-size="9.5" font-weight="600">• Fondo Maniobra: -44,3 M€</text>
+              <text x="12" y="86" fill="#c084fc" font-size="9.5" font-weight="600">• Acción cae a 2,80 €</text>
+            </g>
+          </g>
+
+          <!-- Milestone 5 -->
+          <g transform="translate(790, 0)">
+            <line x1="0" y1="593.6" x2="0" y2="240" stroke="#f59e0b" stroke-width="2" stroke-dasharray="4,4"/>
+            <circle cx="0" cy="593.6" r="8" fill="#07080c" stroke="#f59e0b" stroke-width="3"/>
+            <g transform="translate(-75, 130)">
+              <rect x="0" y="0" width="175" height="110" fill="url(#cardDarkRedP5)" stroke="#f59e0b" stroke-width="1.5"/>
+              <rect x="10" y="-12" width="85" height="20" fill="#d97706"/>
+              <text x="52" y="2" fill="#ffffff" font-size="10" font-weight="800" text-anchor="middle">MAYO 2024</text>
+              <text x="12" y="22" fill="#ffffff" font-size="11" font-weight="800">⚠️ Preconcurso & EY</text>
+              <text x="12" y="40" fill="#fbbf24" font-size="16" font-weight="800">20 M€ <tspan font-size="10" fill="#94a3b8">Rescate ICF</tspan></text>
+              <text x="12" y="58" fill="#cbd5e1" font-size="9.5" font-weight="500">• Axon/Geroa no firman</text>
+              <text x="12" y="72" fill="#fbbf24" font-size="9.5" font-weight="600">• EY: Going Concern</text>
+              <text x="12" y="86" fill="#f87171" font-size="9.5" font-weight="600">• Acción desplomada: 1,10 €</text>
+            </g>
+          </g>
+
+          <!-- Milestone 6 -->
+          <g transform="translate(950, 0)">
+            <line x1="0" y1="599.84" x2="0" y2="640" stroke="#ef4444" stroke-width="2" stroke-dasharray="4,4"/>
+            <circle cx="0" cy="599.84" r="8" fill="#07080c" stroke="#ef4444" stroke-width="3"/>
+            <g transform="translate(-75, 640)">
+              <rect x="0" y="0" width="170" height="115" fill="url(#cardDarkRedP5)" stroke="#ef4444" stroke-width="1.5"/>
+              <rect x="10" y="-12" width="80" height="20" fill="#dc2626"/>
+              <text x="50" y="2" fill="#ffffff" font-size="10" font-weight="800" text-anchor="middle">AÑO 2025</text>
+              <text x="12" y="22" fill="#ffffff" font-size="11" font-weight="800">✂️ ERE & Ajuste</text>
+              <text x="12" y="40" fill="#f87171" font-size="16" font-weight="800">-22,2 M€ <tspan font-size="10" fill="#94a3b8">Pérdidas</tspan></text>
+              <text x="12" y="58" fill="#cbd5e1" font-size="9.5" font-weight="500">• Entra fondo Icosium</text>
+              <text x="12" y="72" fill="#f87171" font-size="9.5" font-weight="600">• Recorte 43% plantilla</text>
+              <text x="12" y="86" fill="#cbd5e1" font-size="9.5" font-weight="500">• Cotización en 0,84 €</text>
+            </g>
+          </g>
+
+          <!-- Milestone 7 -->
+          <g transform="translate(1120, 0)">
+            <line x1="0" y1="600.17" x2="0" y2="240" stroke="#ef4444" stroke-width="2.5"/>
+            <circle cx="0" cy="600.17" r="12" fill="#ef4444" stroke="#ffffff" stroke-width="3.5" filter="url(#glowRedP5)"/>
+            <circle cx="0" cy="600.17" r="4" fill="#ffffff"/>
+            <g transform="translate(-105, 115)">
+              <rect x="0" y="0" width="195" height="125" fill="url(#cardDarkRedP5)" stroke="#ef4444" stroke-width="2"/>
+              <rect x="10" y="-12" width="100" height="20" fill="#991b1b"/>
+              <text x="60" y="2" fill="#ffffff" font-size="10" font-weight="800" text-anchor="middle">JULIO 2026</text>
+              <text x="12" y="22" fill="#ffffff" font-size="12" font-weight="900">🚫 INHABILITACIÓN</text>
+              <text x="12" y="42" fill="#f87171" font-size="17" font-weight="900">6 M€ <tspan font-size="10" fill="#fca5a5">Deuda Peajes</tspan></text>
+              <text x="12" y="60" fill="#cbd5e1" font-size="9.5" font-weight="600">• Expediente MITECO</text>
+              <text x="12" y="74" fill="#cbd5e1" font-size="9.5" font-weight="600">• Suspensión BME Growth</text>
+              <text x="12" y="88" fill="#38bdf8" font-size="9.5" font-weight="700">• Traspaso clientes a PVPC</text>
+              <text x="12" y="104" fill="#ef4444" font-size="9.5" font-weight="800">Cierre Bursátil: 0,826 € 🚫</text>
+            </g>
+          </g>
+
+          <!-- Bottom Axis Dates -->
+          <g transform="translate(0, 630)">
+            <line x1="80" y1="0" x2="1220" y2="0" stroke="#334155" stroke-width="1.5"/>
+            <text x="110" y="18" fill="#10b981" font-size="11" font-weight="800" text-anchor="middle">Nov 2019</text>
+            <text x="270" y="18" fill="#06b6d4" font-size="11" font-weight="800" text-anchor="middle">Mar 2021</text>
+            <text x="350" y="18" fill="#38bdf8" font-size="11" font-weight="800" text-anchor="middle">Nov 2021 (ATH)</text>
+            <text x="470" y="18" fill="#0284c7" font-size="11" font-weight="800" text-anchor="middle">Oct 2022</text>
+            <text x="630" y="18" fill="#8b5cf6" font-size="11" font-weight="800" text-anchor="middle">Año 2023</text>
+            <text x="790" y="18" fill="#f59e0b" font-size="11" font-weight="800" text-anchor="middle">May 2024</text>
+            <text x="950" y="18" fill="#ef4444" font-size="11" font-weight="800" text-anchor="middle">Año 2025</text>
+            <text x="1120" y="18" fill="#ef4444" font-size="11" font-weight="900" text-anchor="middle">Julio 2026 🚫</text>
+          </g>
+
+          <!-- Bottom Badges Bar -->
+          <g transform="translate(50, 800)">
+            <rect x="0" y="0" width="1180" height="46" fill="#131722" stroke="#334155" stroke-width="1"/>
+            <circle cx="35" cy="23" r="6" fill="#10b981"/>
+            <text x="48" y="27" fill="#e2e8f0" font-size="11" font-weight="600">1. IPO (7,78 €)</text>
+            <circle cx="200" cy="23" r="6" fill="#06b6d4"/>
+            <text x="213" y="27" fill="#e2e8f0" font-size="11" font-weight="600">2. ICAC / Captación (18,4 M€)</text>
+            <circle cx="430" cy="23" r="6" fill="#38bdf8"/>
+            <text x="443" y="27" fill="#e2e8f0" font-size="11" font-weight="600">3. Pico ATH (14,40 €)</text>
+            <circle cx="620" cy="23" r="6" fill="#0284c7"/>
+            <text x="633" y="27" fill="#e2e8f0" font-size="11" font-weight="600">4. Cierre Gas (2022)</text>
+            <circle cx="800" cy="23" r="6" fill="#8b5cf6"/>
+            <text x="813" y="27" fill="#e2e8f0" font-size="11" font-weight="600">5. Crisis Solar (-26 M€)</text>
+            <circle cx="990" cy="23" r="7" fill="#ef4444" stroke="#ffffff" stroke-width="2"/>
+            <text x="1004" y="27" fill="#f87171" font-size="11" font-weight="800">6. Suspensión (0,826 €)</text>
+          </g>
+        </svg>
+      </div>
+
+      <!-- Explicación de los hitos bursátiles y corporativos -->
+      <div style="font-size: 0.72rem; font-weight: 800; color: var(--accent-cyan); margin: 4px 0 2px; text-transform: uppercase; letter-spacing: 0.05em;">
+        📌 Explicación Analítica de los Hitos Clave
+      </div>
+
+      <div class="milestones-explain-grid">
+        <div class="milestone-card-item">
+          <span class="milestone-tag-inline" style="background: rgba(16,185,129,0.15); color: #34d399; border: 1px solid rgba(16,185,129,0.3);">NOV 2019</span>
+          <strong>Salida a BME Growth (7,78 €):</strong> Val. inicial 160 M€ y captación 30 M€ para acelerar captación de clientes.
+        </div>
+
+        <div class="milestone-card-item">
+          <span class="milestone-tag-inline" style="background: rgba(6,182,212,0.15); color: #38bdf8; border: 1px solid rgba(6,182,212,0.3);">MAR 2021</span>
+          <strong>Criterio ICAC (18,4 M€):</strong> Periodificación diferida en activo e inmovilización >10 M€ en software propio.
+        </div>
+
+        <div class="milestone-card-item">
+          <span class="milestone-tag-inline" style="background: rgba(2,132,199,0.15); color: #60a5fa; border: 1px solid rgba(2,132,199,0.3);">OCT 2022</span>
+          <strong>Cierre del Gas (70k a TUR):</strong> Salida del negocio gasista (derivando clientes a la TUR) perdiendo margen cruzado.
+        </div>
+
+        <div class="milestone-card-item">
+          <span class="milestone-tag-inline" style="background: rgba(139,92,246,0.15); color: #c084fc; border: 1px solid rgba(139,92,246,0.3);">AÑO 2023</span>
+          <strong>Frenazo Solar (-26 M€):</strong> Caída 50% autoconsumo, arrastrando fondo de maniobra a −44,3 M€.
+        </div>
+
+        <div class="milestone-card-item">
+          <span class="milestone-tag-inline" style="background: rgba(245,158,11,0.15); color: #fbbf24; border: 1px solid rgba(245,158,11,0.3);">MAYO 2024</span>
+          <strong>Preconcurso & EY (20 M€):</strong> Preconcurso por falta de acuerdo; EY emite llamada por <em>Going Concern</em>.
+        </div>
+
+        <div class="milestone-card-item">
+          <span class="milestone-tag-inline" style="background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.3);">AÑO 2025</span>
+          <strong>ERE & Fondo Icosium (-22,2 M€):</strong> Recorte 43% plantilla (752 a 167 empl.) y entrada del fondo Icosium (33%).
+        </div>
+
+        <div class="milestone-card-item" style="grid-column: span 2; border-left: 3px solid var(--accent-red); background: rgba(239,68,68,0.06); padding: 3px 6px;">
+          <span class="milestone-tag-inline" style="background: #991b1b; color: #ffffff;">JULIO 2026</span>
+          <strong style="color: #f87171;">Inhabilitación MITECO & Suspensión (0,826 €):</strong> Expediente por impago 6 M€ peajes, traspaso a PVPC y suspensión BME Growth en 0,826 €.
+        </div>
+      </div>
+
+    </div>
+
+    <div class="page-footer">
+      <span>Estudio Holaluz</span>
+      <span class="footer-domain">www.powertrader.es</span>
+      <span>PÁGINA 07 DE 16</span>
+    </div>
+  </div>
+
+  <!-- ==================== PÁGINA 8: EVOLUCIÓN FINANCIERA (PARTE I) ==================== -->
+  <div class="document-page page-interior">
+    <div class="page-header">
+      <div class="brand-combined">
+        <img src="powerradar_logo.png" alt="Power Radar Logo" class="brand-logo-img">
+      </div>
+      <div class="report-subtitle-tag">VISIÓN BURSÁTIL: SECTOR ENERGÉTICO</div>
+    </div>
+
+    <div class="page-main-content">
+      <div class="section-header">
+        <div class="accent-pill"></div>
+        <h2 class="section-title">04. Evolución Financiera & Operativa (2019-2025)</h2>
+      </div>
+
+      <div style="font-size: 0.84rem; font-weight: 800; color: var(--accent-cyan); margin-bottom: 8px;">📊 Cuadro Comparativo Anual Consolidado (Financiero)</div>
+      
+      <!-- Tabla 1 con números enteros sin decimales en facturación -->
+      <table class="doc-table-fixed">
+        <thead>
+          <tr>
+            <th style="width: 28%;">Concepto</th>
+            <th class="num">FY19</th>
+            <th class="num">FY20</th>
+            <th class="num">FY21</th>
+            <th class="num">FY22</th>
+            <th class="num">FY23</th>
+            <th class="num">FY24</th>
+            <th class="num">FY25</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Facturación Total</strong></td>
+            <td class="num">209M€</td>
+            <td class="num">236M€</td>
+            <td class="num">572M€</td>
+            <td class="num" style="color:#38bdf8; font-weight:700;">920M€</td>
+            <td class="num">617M€</td>
+            <td class="num">271M€</td>
+            <td class="num" style="color:#f87171;">159M€</td>
+          </tr>
+          <tr>
+            <td><strong>Resultado Neto</strong></td>
+            <td class="num" style="color:#f87171;">−0,8M€</td>
+            <td class="num" style="color:#f87171;">−0,7M€</td>
+            <td class="num" style="color:#f87171;">−5,4M€</td>
+            <td class="num" style="color:#f87171;">−5,1M€</td>
+            <td class="num" style="color:#ef4444; font-weight:700;">−26,2M€</td>
+            <td class="num" style="color:#ef4444; font-weight:700;">−31,5M€</td>
+            <td class="num" style="color:#ef4444; font-weight:700;">−22,2M€</td>
+          </tr>
+          <tr>
+            <td><strong>Publicidad y RR.PP.</strong></td>
+            <td class="num" style="color:#94a3b8;">n.d.</td>
+            <td class="num" style="color:#94a3b8;">n.d.</td>
+            <td class="num">11,7M€</td>
+            <td class="num" style="color:#fbbf24; font-weight:700;">25,3M€</td>
+            <td class="num" style="color:#fbbf24;">24,8M€</td>
+            <td class="num" style="color:#94a3b8;">n.d.</td>
+            <td class="num" style="color:#94a3b8;">n.d.</td>
+          </tr>
+          <tr>
+            <td><strong>Fondo Maniobra</strong></td>
+            <td class="num" style="color:#fbbf24;">Neg.</td>
+            <td class="num" style="color:#34d399;">Pos.</td>
+            <td class="num" style="color:#94a3b8;">n.d.</td>
+            <td class="num" style="color:#f87171;">−28,9M€</td>
+            <td class="num" style="color:#ef4444;">−44,3M€</td>
+            <td class="num" style="color:#ef4444; font-weight:700;">−56,4M€</td>
+            <td class="num" style="color:#ef4444;">Neg.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Redacción analítica de 2 párrafos sobre lo más destacado de la Tabla 1 -->
+      <div class="fin-analysis-text">
+        <p style="margin-bottom: 8px;">
+          El análisis consolidado de la trayectoria financiera de Holaluz refleja una clara desconexión entre la aceleración del volumen de ingresos y la generación real de caja libre. Tras alcanzar un pico de facturación de <strong>920 M€ en FY22</strong> empujado por la escalada extraordinaria de los precios energéticos mayoristas, la cifra de negocios inició una severa contracción hasta situarse en <strong>159 M€ en FY25</strong>, lo que representa una demolición del 82% de su volumen comercial en solo tres ejercicios.
+        </p>
+        <p>
+          Esta contracción se vio agravada por un modelo comercial fuertemente apalancado en gastos de publicidad y RR.PP. que superaron los <strong>25,3 M€ en FY22</strong> y <strong>24,8 M€ en FY23</strong>, consumiendo la liquidez de la compañía. Al imputar estos elevados costes de captación mediante el diferimiento al activo y acumular pérdidas netas continuadas (destacando <strong>−26,2 M€ en FY23</strong> y <strong>−31,5 M€ en FY24</strong>), el fondo de maniobra se hundió hasta un saldo crítico de <strong>−56,4 M€</strong>, desencadenando la asfixia de circulante e impagos regulatorios.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="page-footer">
+      <span>Estudio Holaluz</span>
+      <span class="footer-domain">www.powertrader.es</span>
+      <span>PÁGINA 08 DE 16</span>
+    </div>
+  </div>
+
+  <!-- ==================== PÁGINA 9: EVOLUCIÓN FINANCIERA (PARTE II) ==================== -->
+  <div class="document-page page-interior">
+    <div class="page-header">
+      <div class="brand-combined">
+        <img src="powerradar_logo.png" alt="Power Radar Logo" class="brand-logo-img">
+      </div>
+      <div class="report-subtitle-tag">VISIÓN BURSÁTIL: SECTOR ENERGÉTICO</div>
+    </div>
+
+    <div class="page-main-content">
+      <div class="section-header">
+        <div class="accent-pill"></div>
+        <h2 class="section-title">04. Evolución Financiera & Operativa (Cont.)</h2>
+      </div>
+
+      <div style="font-size: 0.84rem; font-weight: 800; color: var(--accent-cyan); margin-bottom: 8px;">⚙️ Contexto Operativo, Masa Salarial & Contratos</div>
+      
+      <!-- Tabla 2 con 1 sólo decimal -->
+      <table class="doc-table-fixed">
+        <thead>
+          <tr>
+            <th style="width: 28%;">Métrica</th>
+            <th class="num">FY19</th>
+            <th class="num">FY20</th>
+            <th class="num">FY21</th>
+            <th class="num">FY22</th>
+            <th class="num">FY23</th>
+            <th class="num">FY24</th>
+            <th class="num">FY25</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>EBITDA norm.</strong></td>
+            <td class="num" style="color:#94a3b8;">n.d.</td>
+            <td class="num">0,6M€</td>
+            <td class="num" style="color:#f87171;">−2,1M€</td>
+            <td class="num" style="color:#34d399; font-weight:700;">14,3M€</td>
+            <td class="num">4,3M€</td>
+            <td class="num">3,5M€</td>
+            <td class="num" style="color:#94a3b8;">n.d.</td>
+          </tr>
+          <tr>
+            <td><strong>Plantilla cierre</strong></td>
+            <td class="num">188</td>
+            <td class="num">~300</td>
+            <td class="num">354</td>
+            <td class="num" style="color:#38bdf8; font-weight:700;">752</td>
+            <td class="num" style="color:#94a3b8;">n.d.</td>
+            <td class="num">292</td>
+            <td class="num" style="color:#f87171; font-weight:700;">167</td>
+          </tr>
+          <tr>
+            <td><strong>Contratos activos</strong></td>
+            <td class="num">~213k</td>
+            <td class="num">~300k</td>
+            <td class="num" style="color:#38bdf8; font-weight:700;">386k</td>
+            <td class="num">375k</td>
+            <td class="num">~325k</td>
+            <td class="num">~300k</td>
+            <td class="num" style="color:#ef4444; font-weight:700;">221k</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Redacción analítica de 2 párrafos sobre lo más destacado de la Tabla 2 -->
+      <div class="fin-analysis-text">
+        <p style="margin-bottom: 6px;">
+          Desde el punto de vista operativo, la estructura fija de costes experimentó una expansión sobredimensionada con la compra directa de empresas instaladoras fotovoltaicas, elevando la plantilla total a un máximo histórico de <strong>752 empleados en FY22</strong>. Este incremento de masa salarial rígida dejó a la compañía altamente vulnerable ante la brusca desaceleración del 50% en la demanda de autoconsumo solar residencial durante 2023.
+        </p>
+        <p style="margin-bottom: 8px;">
+          Incapaz de absorber los costes fijos en un entorno de márgenes decrecientes, la compañía se vio obligada a ejecutar reestructuraciones drásticas vía ERE, reduciendo su plantilla en un 43% hasta los <strong>167 trabajadores en FY25</strong>. Esta erosión operativa vino acompañada de un éxodo masivo de clientes, destruyendo más de <strong>165.000 contratos activos</strong> desde el pico de 386.000 contratos hasta los 221.000 al cierre del último periodo auditado.
+        </p>
+      </div>
+
+      <!-- Notas Metodológicas con Hipervínculos activos -->
+      <div style="padding: 8px 11px; background: rgba(15, 23, 42, 0.65); border: 1px solid var(--card-border); border-left: 3px solid var(--accent-cyan); font-size: 0.70rem; line-height: 1.45; color: #cbd5e1;">
+        <strong style="color: var(--accent-cyan); font-size: 0.73rem; text-transform: uppercase; display: block; margin-bottom: 4px;">📌 Notas metodológicas:</strong>
+        <p style="margin-bottom: 3px;">
+          ¹ Los ejercicios 2019 y 2020 corresponden al año fiscal de Holaluz cerrado en septiembre (octubre–septiembre). A partir de 2021, la compañía pasó al año natural (enero–diciembre). Fuentes: <a href="https://cincodias.elpais.com/companias/2024-05-03/holaluz-desvela-que-tiene-un-fondo-de-maniobra-negativo-de-443-millones-en-una-auditoria-sin-salvedades.html" target="_blank" style="color: #38bdf8; font-weight: 600; text-decoration: underline;">Cinco Días ↗</a>, <a href="https://es.marketscreener.com/cotizacion/accion/HOLALUZ-CLIDOM-S-A-111615444/noticia/Holaluz-Clidom-S-A-Informe-de-auditor-a-cuentas-anuales-consolidadas-e-informe-integrado-2024-3-49778930/" target="_blank" style="color: #38bdf8; font-weight: 600; text-decoration: underline;">Investing.com / MarketScreener ↗</a>.
+        </p>
+        <p style="margin-bottom: 3px;">
+          ² En el paso al calendario natural existe un trimestre de transición (Q4 2020) con facturación de 69,1 M€ no reflejado en la tabla. Fuente: <a href="https://www.bmegrowth.es/docs/documentos/OtraInfRelevante/2023/04/05456_OtraInfRelev_20230425_1.pdf" target="_blank" style="color: #38bdf8; font-weight: 600; text-decoration: underline;">FY2021 Consolidated Financial Information (Scribd / BME Growth) ↗</a>.
+        </p>
+        <p style="margin-bottom: 3px;">
+          ³ Las cuentas consolidadas oficiales reflejan 5,41 M€ de pérdida; prensa económica citó 8,4 M€ tras un reajuste contable posterior. Fuentes: <a href="https://www.bmegrowth.es/docs/documentos/OtraInfRelevante/2023/04/05456_OtraInfRelev_20230425_1.pdf" target="_blank" style="color: #38bdf8; font-weight: 600; text-decoration: underline;">Scribd ↗</a>, <a href="https://www.expansion.com/empresas/energia/2026/07/21/6a5e875ae5fdead21c8b458c.html" target="_blank" style="color: #38bdf8; font-weight: 600; text-decoration: underline;">Expansión ↗</a>.
+        </p>
+        <p style="margin-bottom: 3px;">
+          ⁴ 2023 se reportó inicialmente en torno a 26,2 M€; fuentes posteriores (cuentas de 2024) usan un comparativo reexpresado de ~27,7 M€. Fuentes: <a href="https://cincodias.elpais.com/companias/2024-05-03/holaluz-desvela-que-tiene-un-fondo-de-maniobra-negativo-de-443-millones-en-una-auditoria-sin-salvedades.html" target="_blank" style="color: #38bdf8; font-weight: 600; text-decoration: underline;">Cinco Días ↗</a>, <a href="https://www.elnacional.cat/oneconomia/es/empresas/lotfi-bellahcene-icosium-primer-accionista-llave-holaluz_1671491_102.html" target="_blank" style="color: #38bdf8; font-weight: 600; text-decoration: underline;">El Nacional ↗</a>.
+        </p>
+        <p>
+          ⁵ EY señala "fondo de maniobra negativo" sin especificar importe exacto en su informe de 2025. Fuente: <a href="https://www.expansion.com/empresas/energia/2026/07/21/6a5e875ae5fdead21c8b458c.html" target="_blank" style="color: #38bdf8; font-weight: 600; text-decoration: underline;">Expansión ↗</a>.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="page-footer">
+      <span>Estudio Holaluz</span>
+      <span class="footer-domain">www.powertrader.es</span>
+      <span>PÁGINA 09 DE 16</span>
+    </div>
+  </div>
+
+  <!-- ==================== PÁGINA 10: DICTÁMENES DE AUDITORÍA EY (PARTE I: FY23 y FY24) ==================== -->
+  <div class="document-page page-interior">
+    <div class="page-header">
+      <div class="brand-combined">
+        <img src="powerradar_logo.png" alt="Power Radar Logo" class="brand-logo-img">
+      </div>
+      <div class="report-subtitle-tag">VISIÓN BURSÁTIL: SECTOR ENERGÉTICO</div>
+    </div>
+
+    <div class="page-main-content">
+      <div class="section-header" style="margin: 4px 0 6px;">
+        <div class="accent-pill"></div>
+        <h2 class="section-title" style="font-size: 1.18rem;">05. Dictámenes de Auditoría EY (Parte I: FY23–FY24)</h2>
+      </div>
+
+      <!-- FY 2023 -->
+      <div class="audit-year-card" style="border-left: 4px solid #f59e0b; margin-bottom: 10px; padding: 10px 14px;">
+        <div class="audit-year-title" style="margin-bottom: 4px;">
+          <span>FY 2023 — Advertencia sobre continuidad en auditoría "sin salvedades" (Mayo 2024)</span>
+          <span style="font-family:'JetBrains Mono'; font-size:0.70rem; color:#f59e0b; font-weight:800;">Párrafo de Énfasis</span>
+        </div>
+        <p style="margin-bottom: 6px; font-size: 0.77rem; line-height: 1.45;">
+          EY emitió el informe de auditoría de las cuentas consolidadas de 2023 a principios de mayo de 2024, ya con retraso sobre el plazo reglamentario. La cotización en BME Growth quedó suspendida el 2 de mayo de 2024 por el retraso en la publicación de la información financiera auditada en plazo (fuentes: <a href="https://cincodias.elpais.com/companias/2024-05-03/holaluz-desvela-que-tiene-un-fondo-de-maniobra-negativo-de-443-millones-en-una-auditoria-sin-salvedades.html" target="_blank" style="color: #38bdf8; font-weight: 600; text-decoration: underline;">Cinco Días ↗</a>, <a href="https://elmundo.es/economia/empresas/2026/07/20/6a5dff05e9cf4a5b698b4581.html" target="_blank" style="color: #38bdf8; font-weight: 600; text-decoration: underline;">El Mundo ↗</a>).
+        </p>
+        <p style="margin-bottom: 4px; font-size: 0.77rem; line-height: 1.45;">
+          La opinión de EY fue técnicamente "sin salvedades", pero incluyó una llamada de atención sobre la incertidumbre de empresa en funcionamiento (<em>Going Concern</em>). Los datos clave del informe:
+        </p>
+        <ul style="padding-left: 16px; margin-bottom: 0; font-size: 0.76rem; line-height: 1.45;">
+          <li>Pérdidas de <strong>26,2 M€</strong> (quintuplicando los 5,1 M€ de 2022). Fuente: <a href="https://www.elnacional.cat/oneconomia/es/empresas/holaluz-26-millones-perdidas-financiacion-externa-viable_1207106_102.html" target="_blank" style="color: #38bdf8; font-weight: 600; text-decoration: underline;">El Nacional ↗</a>.</li>
+          <li>Fondo de maniobra negativo de <strong>−44,3 M€</strong>. Fuente: <a href="https://cincodias.elpais.com/companias/2024-05-03/holaluz-desvela-que-tiene-un-fondo-de-maniobra-negativo-de-443-millones-en-una-auditoria-sin-salvedades.html" target="_blank" style="color: #38bdf8; font-weight: 600; text-decoration: underline;">Cinco Días ↗</a>.</li>
+          <li>La compañía reconoció circunstancias que podrían generar dudas sobre la continuidad, citando como mitigantes préstamos por 20 M€ en negociación.</li>
+        </ul>
+      </div>
+
+      <!-- FY 2024 -->
+      <div class="audit-year-card" style="border-left: 4px solid #ef4444; background: rgba(239,68,68,0.05); margin-bottom: 0; padding: 10px 14px;">
+        <div class="audit-year-title" style="margin-bottom: 4px;">
+          <span style="color: #f87171;">FY 2024 — Opinión con salvedades e incertidumbre material (Mayo 2025)</span>
+          <span style="font-family:'JetBrains Mono'; font-size:0.70rem; color:#ef4444; font-weight:800;">Opinión Modificada</span>
+        </div>
+        <p style="margin-bottom: 4px; font-size: 0.77rem; line-height: 1.45;">
+          EY elevó el nivel de alerta al emitir un informe con salvedades (opinión modificada). El texto del auditor, registrado en BME Growth, señaló:
+        </p>
+        <div class="callout-doc" style="margin: 4px 0 6px; padding: 7px 12px; font-size: 0.76rem; line-height: 1.42; background: rgba(239, 68, 68, 0.12);">
+          <strong style="color: #ffffff;">🚨 Dictamen textual del Auditor EY (Mayo 2025):</strong><br>
+          <em>"En el ejercicio 2024 el Grupo ha generado pérdidas por importe de 31,5 millones de euros y al 31 de diciembre de 2024 el fondo de maniobra era negativo por importe de 56,4 millones de euros. [...] Estas circunstancias indican la existencia de una incertidumbre material que puede generar dudas significativas sobre la capacidad del Grupo para continuar como empresa en funcionamiento."</em> (Fuente: <a href="https://es.marketscreener.com/cotizacion/accion/HOLALUZ-CLIDOM-S-A-111615444/noticia/Holaluz-Clidom-S-A-Informe-de-auditor-a-cuentas-anuales-consolidadas-e-informe-integrado-2024-3-49778930/" target="_blank" style="color: #38bdf8; font-weight: 600; text-decoration: underline;">MarketScreener ↗</a>).
+        </div>
+        <p style="font-size: 0.76rem; margin-bottom: 2px;">Como factores mitigantes, EY mencionó:</p>
+        <ul style="padding-left: 16px; font-size: 0.75rem; line-height: 1.45; margin-bottom: 0;">
+          <li>El desembolso previsto de un préstamo convertible por 15,5 M€ (aún no materializado a la fecha del informe).</li>
+          <li>La homologación judicial prevista del acuerdo de reestructuración de la deuda financiera.</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="page-footer">
+      <span>Estudio Holaluz</span>
+      <span class="footer-domain">www.powertrader.es</span>
+      <span>PÁGINA 10 DE 16</span>
+    </div>
+  </div>
+
+  <!-- ==================== PÁGINA 11: DICTÁMENES DE AUDITORÍA EY (PARTE II: FY25 & SÍNTESIS) ==================== -->
+  <div class="document-page page-interior">
+    <div class="page-header">
+      <div class="brand-combined">
+        <img src="powerradar_logo.png" alt="Power Radar Logo" class="brand-logo-img">
+      </div>
+      <div class="report-subtitle-tag">VISIÓN BURSÁTIL: SECTOR ENERGÉTICO</div>
+    </div>
+
+    <div class="page-main-content">
+      <div class="section-header" style="margin: 4px 0 6px;">
+        <div class="accent-pill"></div>
+        <h2 class="section-title" style="font-size: 1.18rem;">05. Dictámenes de Auditoría EY (Parte II: FY25 & Suspensión)</h2>
+      </div>
+
+      <!-- FY 2025 -->
+      <div class="audit-year-card" style="border-left: 4px solid #991b1b; margin-bottom: 12px; padding: 12px 15px;">
+        <div class="audit-year-title" style="margin-bottom: 6px;">
+          <span style="color: #fca5a5;">FY 2025 — Persistencia de la incertidumbre (2026)</span>
+          <span style="font-family:'JetBrains Mono'; font-size:0.70rem; color:#991b1b; font-weight:800;">Suspensión BOE</span>
+        </div>
+        <p style="margin-bottom: 6px; font-size: 0.78rem; line-height: 1.48;">
+          EY mantuvo su opinión con salvedades en el informe sobre las cuentas de 2025. Según <em>Expansión</em>, el auditor señaló que <em>"el cumplimiento de sus obligaciones de pago dependía de su plan de negocio y de las previsiones de tesorería"</em> (fuente: <a href="https://www.expansion.com/empresas/energia/2026/07/21/6a5e875ae5fdead21c8b458c.html" target="_blank" style="color: #38bdf8; font-weight: 600; text-decoration: underline;">Expansión ↗</a>).
+        </p>
+        <ul style="padding-left: 16px; font-size: 0.77rem; line-height: 1.48; margin-bottom: 0;">
+          <li>Pérdidas de <strong>22,2 M€</strong> (29,5% menos que en 2024). Fuente: <a href="https://elmundo.es/economia/empresas/2026/07/20/6a5dff05e9cf4a5b698b4581.html" target="_blank" style="color: #38bdf8; font-weight: 600; text-decoration: underline;">El Mundo ↗</a>.</li>
+          <li>Fondo de maniobra negativo (importe no especificado). Fuente: <a href="https://www.expansion.com/empresas/energia/2026/07/21/6a5e875ae5fdead21c8b458c.html" target="_blank" style="color: #38bdf8; font-weight: 600; text-decoration: underline;">Expansión ↗</a>.</li>
+          <li>La cotización fue suspendida de nuevo el <strong>20 de julio de 2026</strong> tras la publicación en el BOE del inicio del procedimiento de inhabilitación como comercializadora. Fuentes: <a href="https://elmundo.es/economia/empresas/2026/07/20/6a5dff05e9cf4a5b698b4581.html" target="_blank" style="color: #38bdf8; font-weight: 600; text-decoration: underline;">El Mundo ↗</a>, <a href="https://elpais.com/economia/2026-07-19/holaluz-alegara-contra-el-expediente-de-transicion-ecologica-para-inhabilitarla-como-comercializadora-de-electricidad.html" target="_blank" style="color: #38bdf8; font-weight: 600; text-decoration: underline;">El País ↗</a>.</li>
+        </ul>
+      </div>
+
+      <!-- Síntesis de Riesgo de Continuidad -->
+      <div style="background: rgba(15, 23, 42, 0.65); border: 1px solid var(--card-border); border-left: 4px solid var(--accent-cyan); padding: 12px 15px; font-size: 0.80rem; line-height: 1.52; color: #cbd5e1;">
+        <strong style="color: #38bdf8; font-size: 0.85rem; display: block; margin-bottom: 4px;">💡 Síntesis del Perfil Auditor (2023 – 2026):</strong>
+        La concatenación de informes de auditoría desfavorables ilustra un progresivo deterioro del perfil de liquidez de la compañía. La transición desde una advertencia por <em>Going Concern</em> con salvedades omitidas en 2023 hasta la formulación de opinión modificada por salvedades explícitas en 2024 y 2025 demuestra la incapacidad estructural de restablecer un fondo de maniobra positivo, culminando en la paralización regulatoria del negocio tras la inhabilitación del MITECO por peajes impagados.
+      </div>
+
+    </div>
+
+    <div class="page-footer">
+      <span>Estudio Holaluz</span>
+      <span class="footer-domain">www.powertrader.es</span>
+      <span>PÁGINA 11 DE 16</span>
+    </div>
+  </div>
+
+  <!-- ==================== PÁGINA 12: AVALES DEL ICO (PARTE I: DEUDA Y REESTRUCTURACIÓN) ==================== -->
+  <div class="document-page page-interior">
+    <div class="page-header">
+      <div class="brand-combined">
+        <img src="powerradar_logo.png" alt="Power Radar Logo" class="brand-logo-img">
+      </div>
+      <div class="report-subtitle-tag">VISIÓN BURSÁTIL: SECTOR ENERGÉTICO</div>
+    </div>
+
+    <div class="page-main-content">
+      <div class="section-header" style="margin: 4px 0 8px;">
+        <div class="accent-pill"></div>
+        <h2 class="section-title" style="font-size: 1.15rem;">🏦 06. Avales del ICO & Estructura Financiera (Parte I)</h2>
+      </div>
+
+      <!-- El ICO como principal avalista -->
+      <div style="background: var(--card-bg); border: 1px solid var(--card-border); padding: 12px 16px; margin-bottom: 12px; font-size: 0.81rem; line-height: 1.55;">
+        <strong style="color: var(--accent-amber); font-size: 0.85rem; display: block; margin-bottom: 5px;">El ICO como principal avalista</strong>
+        El Estado, a través del Instituto de Crédito Oficial (ICO), es el principal avalista financiero de Holaluz. Según los últimos datos presentados por la compañía, aproximadamente el <strong>70% de la deuda corporativa</strong> del grupo está respaldada por avales del ICO (fuentes: <a href="https://www.expansion.com/empresas/energia/2026/07/21/6a5e875ae5fdead21c8b458c.html" target="_blank" style="color: #38bdf8; font-weight: 600; text-decoration: underline;">Expansión ↗</a>, <a href="https://www.libertaddigital.com/libremercado/2026-07-26/por-que-los-impagos-de-holaluz-amenazan-al-contribuyente-espanol-7438879/" target="_blank" style="color: #38bdf8; font-weight: 600; text-decoration: underline;">Libertad Digital ↗</a>). A 31 de diciembre de 2025, la deuda con entidades de crédito ascendía a <strong>29,8 M€</strong>:
+      </div>
+
+      <!-- Tabla Deuda Bancaria ICO estilizada con ajuste perfecto -->
+      <table style="width: 100%; border-collapse: collapse; font-size: 0.77rem; margin-bottom: 12px; border: 1px solid var(--card-border); background: var(--card-bg);">
+        <thead>
+          <tr style="background: rgba(255, 255, 255, 0.06); border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+            <th style="padding: 8px 10px; text-align: left; width: 38%; color: #ffffff; font-weight: 700;">Concepto de Deuda</th>
+            <th style="padding: 8px 10px; text-align: right; width: 20%; color: #ffffff; font-weight: 700; font-family: 'JetBrains Mono', monospace;">Importe</th>
+            <th style="padding: 8px 10px; text-align: left; width: 42%; color: #ffffff; font-weight: 700;">Naturaleza del Aval</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.04);">
+            <td style="padding: 8px 10px;"><strong>Créditos ICO línea COVID</strong></td>
+            <td style="padding: 8px 10px; text-align: right; font-family: 'JetBrains Mono', monospace; color: #fbbf24; font-weight: 700;">10,3 M€</td>
+            <td style="padding: 8px 10px; color: #cbd5e1; line-height: 1.35;">Deuda bancaria respaldada con aval público ICO</td>
+          </tr>
+          <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.04);">
+            <td style="padding: 8px 10px;"><strong>Pólizas de crédito bancarias</strong></td>
+            <td style="padding: 8px 10px; text-align: right; font-family: 'JetBrains Mono', monospace; font-weight: 600;">19,5 M€</td>
+            <td style="padding: 8px 10px; color: #cbd5e1; line-height: 1.35;">Líneas de crédito operativas avaladas por ICO</td>
+          </tr>
+          <tr style="background: rgba(245, 158, 11, 0.12);">
+            <td style="padding: 8px 10px;"><strong>Total deuda entidades de crédito</strong></td>
+            <td style="padding: 8px 10px; text-align: right; font-family: 'JetBrains Mono', monospace; color: #38bdf8; font-weight: 800;">29,8 M€</td>
+            <td style="padding: 8px 10px; color: #38bdf8; font-weight: 700; line-height: 1.35;">70% Cobertura de garantía estatal</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div style="font-size: 0.78rem; color: #cbd5e1; background: rgba(6,182,212,0.06); border-left: 4px solid var(--accent-cyan); padding: 8px 12px; margin-bottom: 12px; line-height: 1.5;">
+        Holaluz desmintió públicamente <em>"que los avales otorgados por el ICO se encuentren comprometidos como consecuencia de este procedimiento"</em> en su comunicado al BME Growth del 21 de julio de 2026. Fuente: <a href="https://es.marketscreener.com/noticias/holaluz-clidom-s-a-aclaraci-n-sobre-las-informaciones-publicadas-sobre-holaluz-clarification-in-ce7f51dbd088f225" target="_blank" style="color: #38bdf8; font-weight: 600; text-decoration: underline;">MarketScreener ↗</a>.
+      </div>
+
+      <!-- Plan de reestructuración de deuda (julio 2025) -->
+      <div style="background: var(--card-bg); border: 1px solid var(--card-border); padding: 12px 16px; font-size: 0.80rem; line-height: 1.55;">
+        <strong style="color: var(--accent-cyan); font-size: 0.84rem; display: block; margin-bottom: 5px;">Plan de reestructuración de deuda (julio 2025)</strong>
+        El 29 de julio de 2025 entró en vigor un plan de reestructuración de la deuda con las siguientes características clave:
+        <ul style="padding-left: 16px; margin-top: 5px; line-height: 1.55;">
+          <li>Cubre el 100% de la deuda sin quitas para los acreedores.</li>
+          <li>Extiende los vencimientos bursátiles y bancarios hasta 2028.</li>
+          <li>Aproximadamente el 70% respaldado por avales del ICO.</li>
+          <li>Acreedores renunciaron a ciertas cláusulas contractuales (<em>covenants</em>) hasta 2026.</li>
+          <li>Contó con una ampliación de capital de 22 M€, totalmente ejecutada. Fuentes: <a href="https://www.rankia.com/foros/bolsa/temas/4379342-holaluz-mab" target="_blank" style="color: #38bdf8; font-weight: 600; text-decoration: underline;">Rankia ↗</a>, <a href="https://www.libertaddigital.com/libremercado/2026-07-26/por-que-los-impagos-de-holaluz-amenazan-al-contribuyente-espanol-7438879/" target="_blank" style="color: #38bdf8; font-weight: 600; text-decoration: underline;">Libertad Digital ↗</a>.</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="page-footer">
+      <span>Estudio Holaluz</span>
+      <span class="footer-domain">www.powertrader.es</span>
+      <span>PÁGINA 12 DE 16</span>
+    </div>
+  </div>
+
+  <!-- ==================== PÁGINA 13: AVALES DEL ICO (PARTE II: ACCIONARIADO Y MÉTRICAS) ==================== -->
+  <div class="document-page page-interior">
+    <div class="page-header">
+      <div class="brand-combined">
+        <img src="powerradar_logo.png" alt="Power Radar Logo" class="brand-logo-img">
+      </div>
+      <div class="report-subtitle-tag">VISIÓN BURSÁTIL: SECTOR ENERGÉTICO</div>
+    </div>
+
+    <div class="page-main-content">
+      <div class="section-header" style="margin: 4px 0 8px;">
+        <div class="accent-pill"></div>
+        <h2 class="section-title" style="font-size: 1.15rem;">🏦 06. Avales del ICO & Estructura Financiera (Parte II)</h2>
+      </div>
+
+      <!-- Entrada de Icosium y reestructuración accionarial -->
+      <div style="background: var(--card-bg); border: 1px solid var(--card-border); padding: 8px 12px; margin-bottom: 8px;">
+        <strong style="color: #ffffff; font-size: 0.82rem; display: block; margin-bottom: 4px;">👥 Entrada de Icosium y Reestructuración Accionarial (finales 2024)</strong>
+        <p style="font-size: 0.76rem; line-height: 1.42; color: #cbd5e1; margin-bottom: 6px;">
+          El plan de rescate de 2024 dio lugar a la entrada del fondo Icosium Investment, vinculado al inversor franco-argelino Lotfi Bellahcene (fuentes: <a href="https://www.expansion.com/empresas/energia/2026/07/21/6a5e875ae5fdead21c8b458c.html" target="_blank" style="color: #38bdf8; font-weight: 600; text-decoration: underline;">Expansión ↗</a>, <a href="https://www.elnacional.cat/oneconomia/es/empresas/lotfi-bellahcene-icosium-primer-accionista-llave-holaluz_1671491_102.html" target="_blank" style="color: #38bdf8; font-weight: 600; text-decoration: underline;">El Nacional ↗</a>):
+        </p>
+
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.74rem; margin-bottom: 0; border: 1px solid var(--card-border); background: var(--card-bg);">
+          <thead>
+            <tr style="background: rgba(255, 255, 255, 0.06); border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+              <th style="padding: 4px 8px; text-align: left; color: #ffffff; font-weight: 700;">Accionista / Grupo Inversor</th>
+              <th style="padding: 4px 8px; text-align: right; width: 30%; color: #ffffff; font-weight: 700; font-family: 'JetBrains Mono', monospace;">Participación en Capital</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.04);">
+              <td style="padding: 4px 8px;"><strong>Icosium Investment (Lotfi Bellahcene)</strong></td>
+              <td style="padding: 4px 8px; text-align: right; font-family: 'JetBrains Mono', monospace; color: #38bdf8; font-weight: 800;">33,0%</td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.04);">
+              <td style="padding: 4px 8px;">Axon Partners</td>
+              <td style="padding: 4px 8px; text-align: right; font-family: 'JetBrains Mono', monospace; color: #cbd5e1;">11,0%</td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.04);">
+              <td style="padding: 4px 8px;">Carlota Pi (cofundadora)</td>
+              <td style="padding: 4px 8px; text-align: right; font-family: 'JetBrains Mono', monospace; color: #cbd5e1;">~10,0%</td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.04);">
+              <td style="padding: 4px 8px;">Oriol Vila (cofundador)</td>
+              <td style="padding: 4px 8px; text-align: right; font-family: 'JetBrains Mono', monospace; color: #cbd5e1;">~10,0%</td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.04);">
+              <td style="padding: 4px 8px;">Ferran Nogué (cofundador)</td>
+              <td style="padding: 4px 8px; text-align: right; font-family: 'JetBrains Mono', monospace; color: #cbd5e1;">~10,0%</td>
+            </tr>
+            <tr style="background: rgba(255, 255, 255, 0.03);">
+              <td style="padding: 4px 8px;"><strong>Resto (mercado libre / BME Growth)</strong></td>
+              <td style="padding: 4px 8px; text-align: right; font-family: 'JetBrains Mono', monospace; color: #94a3b8; font-weight: 700;">~26,0%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Deuda neta y métricas recientes estilizada -->
+      <div style="background: var(--card-bg); border: 1px solid var(--card-border); padding: 8px 12px;">
+        <strong style="color: #ffffff; font-size: 0.82rem; display: block; margin-bottom: 6px;">📊 Deuda Neta y Métricas Recientes</strong>
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.74rem; border: 1px solid var(--card-border); background: var(--card-bg);">
+          <thead>
+            <tr style="background: rgba(255, 255, 255, 0.06); border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+              <th style="padding: 4px 8px; text-align: left; width: 40%; color: #ffffff; font-weight: 700;">Métrica Financiera</th>
+              <th style="padding: 4px 8px; text-align: right; width: 18%; color: #ffffff; font-weight: 700; font-family: 'JetBrains Mono', monospace;">Valor</th>
+              <th style="padding: 4px 8px; text-align: center; width: 20%; color: #ffffff; font-weight: 700;">Fecha Referencia</th>
+              <th style="padding: 4px 8px; text-align: left; width: 22%; color: #ffffff; font-weight: 700;">Fuente</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.04);">
+              <td style="padding: 4px 8px;"><strong>Deuda neta consolidada</strong></td>
+              <td style="padding: 4px 8px; text-align: right; font-family: 'JetBrains Mono', monospace; color: #f87171; font-weight: 800;">44,7 M€</td>
+              <td style="padding: 4px 8px; text-align: center; color: #cbd5e1;">31 dic. 2025</td>
+              <td style="padding: 4px 8px;"><a href="https://www.libertaddigital.com/libremercado/2026-07-26/por-que-los-impagos-de-holaluz-amenazan-al-contribuyente-espanol-7438879/" target="_blank" style="color: #38bdf8; font-weight: 600; text-decoration: underline;">Libertad Digital ↗</a></td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.04);">
+              <td style="padding: 4px 8px;"><strong>Deuda neta consolidada</strong></td>
+              <td style="padding: 4px 8px; text-align: right; font-family: 'JetBrains Mono', monospace; color: #cbd5e1; font-weight: 600;">42,8 M€</td>
+              <td style="padding: 4px 8px; text-align: center; color: #cbd5e1;">30 jun. 2025</td>
+              <td style="padding: 4px 8px;"><a href="https://www.rankia.com/foros/bolsa/temas/4379342-holaluz-mab" target="_blank" style="color: #38bdf8; font-weight: 600; text-decoration: underline;">Rankia ↗</a></td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.04);">
+              <td style="padding: 4px 8px;"><strong>Deuda con entidades de crédito</strong></td>
+              <td style="padding: 4px 8px; text-align: right; font-family: 'JetBrains Mono', monospace; color: #fbbf24; font-weight: 700;">29,8 M€</td>
+              <td style="padding: 4px 8px; text-align: center; color: #cbd5e1;">31 dic. 2025</td>
+              <td style="padding: 4px 8px;"><a href="https://www.expansion.com/empresas/energia/2026/07/21/6a5e875ae5fdead21c8b458c.html" target="_blank" style="color: #38bdf8; font-weight: 600; text-decoration: underline;">Expansión ↗</a></td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.04);">
+              <td style="padding: 4px 8px;"><strong>Capitalización bursátil (pre-suspensión)</strong></td>
+              <td style="padding: 4px 8px; text-align: right; font-family: 'JetBrains Mono', monospace; color: #cbd5e1; font-weight: 600;">~27,0 M€</td>
+              <td style="padding: 4px 8px; text-align: center; color: #cbd5e1;">Julio 2026</td>
+              <td style="padding: 4px 8px;"><a href="https://www.expansion.com/empresas/energia/2026/07/21/6a5e875ae5fdead21c8b458c.html" target="_blank" style="color: #38bdf8; font-weight: 600; text-decoration: underline;">Expansión ↗</a></td>
+            </tr>
+            <tr>
+              <td style="padding: 4px 8px;"><strong>Préstamo convertible (Icosium)</strong></td>
+              <td style="padding: 4px 8px; text-align: right; font-family: 'JetBrains Mono', monospace; color: #38bdf8; font-weight: 700;">15,5 M€</td>
+              <td style="padding: 4px 8px; text-align: center; color: #cbd5e1;">Tras homologación</td>
+              <td style="padding: 4px 8px;"><a href="https://es.marketscreener.com/cotizacion/accion/HOLALUZ-CLIDOM-S-A-111615444/noticia/Holaluz-Clidom-S-A-Informe-de-auditor-a-cuentas-anuales-consolidadas-e-informe-integrado-2024-3-49778930/" target="_blank" style="color: #38bdf8; font-weight: 600; text-decoration: underline;">MarketScreener ↗</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="page-footer">
+      <span>Estudio Holaluz</span>
+      <span class="footer-domain">www.powertrader.es</span>
+      <span>PÁGINA 13 DE 16</span>
+    </div>
+  </div>
+
+  <!-- ==================== PÁGINA 14: CONCLUSIÓN (PARTE I: MARCO REGULATORIO Y CENSO DE SOLVENCIA) ==================== -->
+  <div class="document-page page-interior">
+    <div class="page-header">
+      <div class="brand-combined">
+        <img src="powerradar_logo.png" alt="Power Radar Logo" class="brand-logo-img">
+      </div>
+      <div class="report-subtitle-tag">VISIÓN BURSÁTIL: SECTOR ENERGÉTICO</div>
+    </div>
+
+    <div class="page-main-content">
+      <div class="section-header" style="margin: 4px 0 8px;">
+        <div class="accent-pill"></div>
+        <h2 class="section-title" style="font-size: 1.20rem;">07. Conclusión (Parte I)</h2>
+      </div>
+
+      <!-- Contexto Regulatorio & Clarificación Aséptica -->
+      <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-left: 4px solid var(--accent-cyan); padding: 12px 16px; margin-bottom: 14px; font-size: 0.80rem; line-height: 1.55; color: #cbd5e1;">
+        <strong style="color: #ffffff; font-size: 0.86rem; display: block; margin-bottom: 5px;">⚖️ Matiz Sectorial: Inactividad Prolongada Vs. Inhabilitación por Falta de Solvencia</strong>
+        Las resoluciones de inhabilitación no obedecen en todos los casos a situaciones de insolvencia. Las inhabilitaciones por <strong>inactividad prolongada</strong> (comercializadoras que cesan voluntariamente su operativa o filiales sin clientes) concentran las marcas y estructuras de mayor notoriedad en el mercado (destacando filiales o vehículos de grupos como <em>Ignis</em>, <em>Energya VM</em>, <em>Gunvor</em> o <em>Naturgy</em>), habiéndose registrado un total de <strong>26 comercializadoras inhabilitadas por inactividad</strong> en lo que va de año. Por su parte, las inhabilitaciones coercitivas causadas estrictamente por <strong>falta de solvencia, liquidez o impago de peajes y garantías</strong> abarcan un censo acumulado de <strong>39 comercializadoras</strong> en el período 2022–2026.
+      </div>
+
+      <!-- Censo Completo de Comercializadoras Inhabilitadas por Solvencia -->
+      <div style="background: rgba(15, 23, 42, 0.75); border: 1px solid var(--card-border); padding: 14px 18px; font-size: 0.76rem; line-height: 1.48;">
+        <strong style="color: var(--accent-amber); font-size: 0.85rem; display: block; margin-bottom: 8px;">📋 Censo Completo: Comercializadoras Inhabilitadas por Incumplimiento de Garantías / Peajes (2022–2026)</strong>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+          <div>
+            <span style="color: #38bdf8; font-weight: 700; font-size: 0.76rem; display: block; margin-bottom: 4px;">• 2022 (11 Entidades — BOE / CNMC):</span>
+            <span style="color: #94a3b8; font-size: 0.73rem; display: block; margin-bottom: 8px;">1. Fusiona Comercializadora, 2. Renovables Enred Energía, 3. Comercial Suministros Eléctricos y Gas, 4. Energía Grafeno, 5. Asistencia Energética, 6. Elektron Comercializadora, 7. Relax Energía, 8. Kipin Energy, 9. Simples Energía de España (+ 2 adicionales en informe CNMC).</span>
+            
+            <span style="color: #38bdf8; font-weight: 700; font-size: 0.76rem; display: block; margin-bottom: 4px;">• 2023 (14 Entidades — CNMC Q4):</span>
+            <span style="color: #94a3b8; font-size: 0.73rem; display: block;">10. Anillaco Energía, 11. Comercializadora Energética Financiera, 12. Energía DLR, 13. Solelec Ibérica, 14. Smart Electric Engineering P2P, 15. Seven Trade Solutions, 16. Henarenergía, 17. Frasead, 18. Wego Energy, 19. Menta Energía, 20. Innova Desarrollo, 21. Aire, 22. Forza Vilalta, 23. Roma Energías.</span>
+          </div>
+
+          <div>
+            <span style="color: #f59e0b; font-weight: 700; font-size: 0.76rem; display: block; margin-bottom: 4px;">• 2024 (4 Entidades — BOE):</span>
+            <span style="color: #94a3b8; font-size: 0.73rem; display: block; margin-bottom: 8px;">24. Uranoscopiae III Energía, 25. Eternal Energy, 26. Rainal Ingeniería, 27. Solar EAAS.</span>
+
+            <span style="color: #ef4444; font-weight: 700; font-size: 0.76rem; display: block; margin-bottom: 4px;">• 2025/2026 (13 Entidades — BOE):</span>
+            <span style="color: #94a3b8; font-size: 0.73rem; display: block;">28. E.Miluz SIE, 29. Suministros Total 2022, 30. Isla Luz de Canarias, 31. Energy Diagonal Dos, 32. Kaibi Investment, 33. Watio Wholesale, 34. Virtual Power Plant, 35. Sermat Futura, 36. Carvisa Energía, 37. Compañía del Sol de Electricidad, 38. Wiberluzygas, 39. Maxi Energía y Consultores, y <strong style="color:#ef4444;">Holaluz</strong> (julio 2026).</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="page-footer">
+      <span>Estudio Holaluz</span>
+      <span class="footer-domain">www.powertrader.es</span>
+      <span>PÁGINA 14 DE 16</span>
+    </div>
+  </div>
+
+  <!-- ==================== PÁGINA 15: CONCLUSIÓN (PARTE II: GARANTÍAS REE/OMIE, TESORERÍA Y COLOFÓN) ==================== -->
+  <div class="document-page page-interior">
+    <div class="page-header">
+      <div class="brand-combined">
+        <img src="powerradar_logo.png" alt="Power Radar Logo" class="brand-logo-img">
+      </div>
+      <div class="report-subtitle-tag">VISIÓN BURSÁTIL: SECTOR ENERGÉTICO</div>
+    </div>
+
+    <div class="page-main-content">
+      <div class="section-header" style="margin: 4px 0 8px;">
+        <div class="accent-pill"></div>
+        <h2 class="section-title" style="font-size: 1.20rem;">07. Conclusión (Parte II)</h2>
+      </div>
+
+      <!-- Mecanismos de Control de Garantías y Descalce de Caja -->
+      <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-left: 4px solid var(--accent-amber); padding: 10px 14px; margin-bottom: 10px; font-size: 0.78rem; line-height: 1.48; color: #cbd5e1;">
+        <strong style="color: var(--accent-amber); font-size: 0.84rem; display: block; margin-bottom: 4px;">⚡ Barreras de Control de REE/OMIE & Descalce Operativo de Tesorería</strong>
+        <p style="margin-bottom: 6px;">
+          El sistema eléctrico impone un estricto blindaje anti-impago operado por REE (Operador del Sistema) y OMIE (Operador del Mercado) mediante liquidaciones quincenales y semanales, exigiendo <strong>Garantías Operativas Básicas (GOB)</strong> antes de acudir a mercado y monitorizando las <strong>Garantías Operativas Adicionales (GOAs)</strong> en función del volumen de energía contratado.
+        </p>
+        <p style="margin-bottom: 0;">
+          <strong>El Descalce Estructural de Caja:</strong> La comercializadora debe inmovilizar colateral bancario prepagado y liquidar la energía a <strong>7–15 días</strong>, mientras que el cobro efectivo al cliente final (residencial/pyme) se dilata entre <strong>40 y 65 días</strong> (periodo de facturación, remesa bancaria y ciclo de cobro). Una erosión de liquidez destruye el fondo de maniobra y provoca el colapso inmediato de las garantías exigidas por REE/OMIE.
+        </p>
+      </div>
+
+      <!-- Protección del Consumidor Final -->
+      <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25); border-left: 4px solid var(--accent-green); padding: 10px 14px; margin-bottom: 10px; font-size: 0.78rem; line-height: 1.48; color: #cbd5e1;">
+        <strong style="color: #34d399; font-size: 0.84rem; display: block; margin-bottom: 4px;">🛡️ Protección Garantizada al Consumidor Final</strong>
+        <p style="margin-bottom: 0;">
+          <strong>Garantía Absoluta de Suministro:</strong> El usuario de una comercializadora inhabilitada por falta de solvencia <strong>NUNCA sufre cortes de luz ni de gas</strong>. El marco regulatorio activa de oficio el traspaso automático de la cartera al Suministrador de Referencia (bajo la tarifa regulada PVPC/TUR), si bien el cliente debe acelerar la contratación con una nueva comercializadora de su elección en el mercado libre para ajustar sus condiciones tarifarias.
+        </p>
+      </div>
+
+      <!-- Colofón Bursátil -->
+      <div style="background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25); border-left: 4px solid var(--accent-cyan); padding: 10px 14px; margin-bottom: 0; font-size: 0.78rem; line-height: 1.48; color: #cbd5e1;">
+        <strong style="color: var(--accent-cyan); font-size: 0.84rem; display: block; margin-bottom: 4px;">💡 Colofón Bursátil: Holaluz como Excepción Singular frente a la Solvencia del Sector</strong>
+        <p style="margin-bottom: 0;">
+          Holaluz representa un <strong>caso atípico y singular</strong> en el mercado español. A diferencia de las pequeñas intermediarias inhabilitadas sin clientes activos, Holaluz fue una cotizada en BME Growth de enorme visibilidad cuyo colapso deriva de errores estratégicos de gestión interna (modelo rígido no <em>Asset-Light</em>, apalancamiento, periodificación diferida de CAC y precios fijos sin coberturas). Este evento puntual <strong>no debe empañar la solidez del sector</strong>, donde la gran mayoría de comercializadoras independientes operan de forma responsable, profesional y financieramente sostenible.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="page-footer">
+      <span>Estudio Holaluz</span>
+      <span class="footer-domain">www.powertrader.es</span>
+      <span>PÁGINA 15 DE 16</span>
+    </div>
+  </div>
+
+  <!-- ==================== PÁGINA 15: FUENTES DOCUMENTALES COMPLETAS (31 LINKS) ==================== -->
+  <div class="document-page page-interior">
+    <div class="page-header">
+      <div class="brand-combined">
+        <img src="powerradar_logo.png" alt="Power Radar Logo" class="brand-logo-img">
+      </div>
+      <div class="report-subtitle-tag">VISIÓN BURSÁTIL: SECTOR ENERGÉTICO</div>
+    </div>
+
+    <div class="page-main-content">
+      <div class="section-header" style="margin: 6px 0 6px;">
+        <div class="accent-pill"></div>
+        <h2 class="section-title" style="font-size: 1.20rem;">08. Fuentes & Referencias Documentales</h2>
+      </div>
+
+      <div style="font-size: 0.80rem; font-weight: 800; color: var(--accent-cyan); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.04em;">
+        📚 Enlaces y Fuentes Documentales Consultadas:
+      </div>
+
+      <!-- Parrilla completa de 31 hipervínculos en 2 columnas con espacio holgado -->
+      <div class="sources-doc-grid-full">
+        <div class="source-doc-item-full">
+          <a href="https://elmundo.es/economia/empresas/2026/07/20/6a5dff05e9cf4a5b698b4581.html" target="_blank">El Mundo — Suspensión de cotización de Holaluz (julio 2026) ↗</a>
+        </div>
+        <div class="source-doc-item-full">
+          <a href="https://www.expansion.com/empresas/energia/2026/07/21/6a5e875ae5fdead21c8b458c.html" target="_blank">Expansión — El ICO como gran avalista de Holaluz (julio 2026) ↗</a>
+        </div>
+        <div class="source-doc-item-full">
+          <a href="https://www.expansion.com/empresas/energia/2026/07/19/6a5d62bce5fdead21c8b457e.html" target="_blank">Expansión — Caída de Holaluz y caos de inhabilitaciones (julio 2026) ↗</a>
+        </div>
+        <div class="source-doc-item-full">
+          <a href="https://elpais.com/economia/2026-07-19/holaluz-alegara-contra-el-expediente-de-transicion-ecologica-para-inhabilitarla-como-comercializadora-de-electricidad.html" target="_blank">El País — Holaluz alegará contra el expediente de inhabilitación (julio 2026) ↗</a>
+        </div>
+        <div class="source-doc-item-full">
+          <a href="https://www.libertaddigital.com/libremercado/2026-07-26/por-que-los-impagos-de-holaluz-amenazan-al-contribuyente-espanol-7438879/" target="_blank">Libertad Digital — Impagos de Holaluz y el contribuyente español (julio 2026) ↗</a>
+        </div>
+        <div class="source-doc-item-full">
+          <a href="https://www.elnacional.cat/oneconomia/es/empresas/holaluz-26-millones-perdidas-financiacion-externa-viable_1207106_102.html" target="_blank">El Nacional — Holaluz: 26 millones de pérdidas y fondo maniobra (mayo 2024) ↗</a>
+        </div>
+        <div class="source-doc-item-full">
+          <a href="https://www.elnacional.cat/oneconomia/es/empresas/holaluz-trata-mira-reavivar-depres-2024-en-caida-libre-con-perdidas-31-millones_1408915_102.html" target="_blank">El Nacional — Holaluz tras 2024: 31 millones en rojo (mayo 2025) ↗</a>
+        </div>
+        <div class="source-doc-item-full">
+          <a href="https://www.elnacional.cat/oneconomia/es/empresas/holaluz-acumula-numeros-rojos-perdida-clientes_1671020_102.html" target="_blank">El Nacional — Holaluz acumula números rojos y pérdida de clientes (julio 2026) ↗</a>
+        </div>
+        <div class="source-doc-item-full">
+          <a href="https://cincodias.elpais.com/cincodias/2020/01/28/companias/1580206756_571504.html" target="_blank">Cinco Días — Holaluz cerró 2019 con pérdidas de 800.000 euros (enero 2020) ↗</a>
+        </div>
+        <div class="source-doc-item-full">
+          <a href="https://cincodias.elpais.com/companias/2024-05-03/holaluz-desvela-que-tiene-un-fondo-de-maniobra-negativo-de-443-millones-en-una-auditoria-sin-salvedades.html" target="_blank">Cinco Días — Fondo maniobra −44,3 M€ en auditoría sin salvedades (mayo 2024) ↗</a>
+        </div>
+        <div class="source-doc-item-full">
+          <a href="https://cincodias.elpais.com/companias/2024-05-29/holaluz-trata-de-tranquilizar-al-mercado-tras-dejarse-las-dos-terceras-partes-de-su-valor-en-2024.html" target="_blank">Cinco Días — Holaluz trata de tranquilizar al mercado (mayo 2024) ↗</a>
+        </div>
+        <div class="source-doc-item-full">
+          <a href="https://cincodias.elpais.com/cincodias/2020/03/26/companias/1585244130_342014.html" target="_blank">Cinco Días — Holaluz incrementa ingresos un 39% (marzo 2020) ↗</a>
+        </div>
+        <div class="source-doc-item-full">
+          <a href="https://www.eldiario.es/economia/ocaso-holaluz-43-millones-perdidas-electrica-vendia-precios-justos-cambiar-mundo_1_11354625.html" target="_blank">eldiario.es — El ocaso de Holaluz: 43 millones de pérdidas (mayo 2024) ↗</a>
+        </div>
+        <div class="source-doc-item-full">
+          <a href="https://www.economiadigital.es/empresas/holaluz-publicidad-contratacion.html" target="_blank">Economía Digital — Holaluz duplicó su gasto en publicidad (mayo 2024) ↗</a>
+        </div>
+        <div class="source-doc-item-full">
+          <a href="https://www.economiadigital.es/empresas/reto-holaluz-sanear-finanzas-recuperar-150000-clientes-mercado-disputado.html" target="_blank">Economía Digital — Reto de Holaluz tras sanear finanzas (agosto 2025) ↗</a>
+        </div>
+        <div class="source-doc-item-full">
+          <a href="https://www.eleconomista.es/energia/noticias/13342545/04/25/holaluz-eleva-un-14-las-perdidas-y-cierra-su-ano-mas-dificil-con-31-millones-en-rojo.html" target="_blank">elEconomista — Holaluz eleva un 14% las pérdidas en 2024 (abril 2025) ↗</a>
+        </div>
+        <div class="source-doc-item-full">
+          <a href="https://www.viaempresa.cat/es/empresa/holaluz-cierra-su-ano-mas-dificil-con-31-millones-en-rojo_2213418_102.html" target="_blank">VIA Empresa — Holaluz cierra su año más difícil con 31M€ en rojo (mayo 2025) ↗</a>
+        </div>
+        <div class="source-doc-item-full">
+          <a href="https://www.expansion.com/catalunya/2022/04/29/626b9d9b468aebce058b45ce.html" target="_blank">Expansión — Holaluz entra en beneficios en Q1 2022 (abril 2022) ↗</a>
+        </div>
+        <div class="source-doc-item-full">
+          <a href="https://es.investing.com/news/stock-market-news/la-junta-de-holaluz-aprueba-cuentas-de-2020-y-ratifica-objetivos-hasta-2023-2091721" target="_blank">Investing.com — Junta de Holaluz aprueba cuentas de 2020 (marzo 2021) ↗</a>
+        </div>
+        <div class="source-doc-item-full">
+          <a href="https://es.investing.com/news/stock-market-news/holaluz-gana-55-millones-hasta-junio-y-triplica-su-facturacion-2308084" target="_blank">Investing.com — Holaluz gana 5,5 millones hasta junio (octubre 2022) ↗</a>
+        </div>
+        <div class="source-doc-item-full">
+          <a href="https://es.marketscreener.com/cotizacion/accion/HOLALUZ-CLIDOM-S-A-111615444/noticia/Holaluz-Clidom-S-A-Informe-de-auditor-a-cuentas-anuales-consolidadas-e-informe-integrado-2024-3-49778930/" target="_blank">MarketScreener — Auditoría EY cuentas consolidadas 2024 (mayo 2025) ↗</a>
+        </div>
+        <div class="source-doc-item-full">
+          <a href="https://es.marketscreener.com/noticias/holaluz-clidom-s-a-aclaraci-n-sobre-las-informaciones-publicadas-sobre-holaluz-clarification-in-ce7f51dbd088f225" target="_blank">MarketScreener — Holaluz desmiente información Expansión (julio 2026) ↗</a>
+        </div>
+        <div class="source-doc-item-full">
+          <a href="https://www.rankia.com/foros/bolsa/temas/4379342-holaluz-mab" target="_blank">Rankia — Foro Holaluz MAB (julio 2026) ↗</a>
+        </div>
+        <div class="source-doc-item-full">
+          <a href="https://www.bmegrowth.es/docs/documentos/OtraInfRelevante/2021/10/05456_OtraInfRelev_20211029_3.pdf" target="_blank">BME Growth — Información relevante Holaluz (2021) ↗</a>
+        </div>
+        <div class="source-doc-item-full">
+          <a href="https://www.bmegrowth.es/docs/documentos/OtraInfRelevante/2023/04/05456_OtraInfRelev_20230425_1.pdf" target="_blank">BME Growth — Cuentas consolidadas 2022 (abril 2023) ↗</a>
+        </div>
+        <div class="source-doc-item-full">
+          <a href="https://corporate.holaluz.com/downloads/impact-reports/holaluz_informe_integrado_23.pdf" target="_blank">Holaluz Corporate — Informe Integrado 2023 ↗</a>
+        </div>
+        <div class="source-doc-item-full">
+          <a href="https://corporate.holaluz.com/downloads/impact-reports/holaluz_informe_integrado_24_re.pdf" target="_blank">Holaluz Corporate — Informe Integrado 2024 ↗</a>
+        </div>
+        <div class="source-doc-item-full">
+          <a href="https://corporate.holaluz.com/downloads/financial/05456_otrainfrelev_20240503_individual.pdf" target="_blank">Holaluz Corporate — Cuentas anuales individuales 2023 (mayo 2024) ↗</a>
+        </div>
+        <div class="source-doc-item-full">
+          <a href="https://corporate.holaluz.com/downloads/financial/opinion-ccaa-holaluz_clidom_31-12-22_individual.pdf" target="_blank">Holaluz Corporate — Informe auditoría CCAA individuales 2022 ↗</a>
+        </div>
+        <div class="source-doc-item-full">
+          <a href="https://www.scribd.com/document/609559858/FY2021-Consolidated-Financial-Information" target="_blank">Scribd — FY2021 Consolidated Financial Information ↗</a>
+        </div>
+        <div class="source-doc-item-full" style="grid-column: span 2;">
+          <a href="https://www.elnacional.cat/oneconomia/es/empresas/lotfi-bellahcene-icosium-primer-accionista-llave-holaluz_1671491_102.html" target="_blank">El Nacional — El enigma Lotfi Bellahcene (julio 2026) ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>Estudio Holaluz</span>
+      <span class="footer-domain">www.powertrader.es</span>
+      <span>PÁGINA 16 DE 16</span>
+    </div>
+  </div>
+
+</body>
+</html>

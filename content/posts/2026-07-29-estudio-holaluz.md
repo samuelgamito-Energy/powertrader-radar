@@ -1,6 +1,6 @@
 ---
 title: "Estudio en Profundidad: Holaluz — Lecciones de Gestión, Liquidez y Solvencia en el Mercado Eléctrico Español"
-date: 2026-07-29T10:00:00+02:00
+date: 2026-07-28T10:00:00+02:00
 draft: false
 tags: ["Holaluz", "Electricidad", "BME Growth", "Regulación", "Mercados", "Análisis Financiero", "OMIE", "REE"]
 ---

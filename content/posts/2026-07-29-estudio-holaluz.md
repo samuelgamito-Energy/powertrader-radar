@@ -3,8 +3,7 @@ title: "Estudio en Profundidad: Holaluz (Informe Completo 16 Páginas)"
 date: 2026-07-28T10:00:00+02:00
 draft: false
 summary: "Estudio en profundidad de 16 páginas sobre la inhabilitación del MITECO, suspensión en BME Growth, dictámenes de EY, avales ICO y dinámica del sector comercializador. Haga clic para abrir el informe interactivo."
-url: "https://radar.powertrader.es/pdf/estudio-en-profundidad-holaluz.html"
-externalLink: "https://radar.powertrader.es/pdf/estudio-en-profundidad-holaluz.html"
+url: "/pdf/estudio-en-profundidad-holaluz.html"
 tags: ["Holaluz", "Electricidad", "BME Growth", "Regulación", "Mercados", "Análisis Financiero", "OMIE", "REE"]
 ---
 
